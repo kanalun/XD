@@ -1,0 +1,8 @@
+log4j.logger.testRemote=INFO,localFile
+log4j.additivity.testRemote=false
+log4j.appender.localFile=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.localFile.DatePattern='.'yyyy-MM-dd
+log4j.appender.localFile.encoding=UTF-8
+log4j.appender.localFile.File=/data/log4j/logs/localFile.log
+log4j.appender.localFile.layout=org.apache.log4j.PatternLayout
+log4j.appender.localFile.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss}, %p %m %n

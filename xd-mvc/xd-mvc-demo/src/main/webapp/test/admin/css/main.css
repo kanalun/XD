@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+
+body {
+	font-family: helvetica, arial, san-serif
+}
+
+table {
+	border-collapse: collapse;
+	border-color: #999;
+	margin-top: .5em
+}
+
+th {
+	background-color: #bbb;
+	color: #000
+}
+
+td,th {
+	padding: .25em
+}

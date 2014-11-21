@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>pom</packaging>
+	<parent>
+		<groupId>com.xindian</groupId>
+		<artifactId>xd-mvc</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>xd-mvc-result</artifactId>
+	<modules>
+		<module>xd-mvc-result-default</module>
+		<module>xd-mvc-result-freemarker</module>
+		<module>xd-mvc-result-img</module>
+		<module>xd-mvc-result-jfreechart</module>
+		<module>xd-mvc-result-json</module>
+		<module>xd-mvc-result-mail</module>
+		<module>xd-mvc-result-rss</module>
+		<module>xd-mvc-result-velocity</module>
+	</modules>
+</project>

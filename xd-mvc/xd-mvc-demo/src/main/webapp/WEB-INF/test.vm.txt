@@ -1,0 +1,24 @@
+<html>
+<body>
+
+At Web
+GB2312<br/>
+#set( $foo = "Velocity" )
+Hello $foo World! 
+<br/>
+Default: $name
+<br/>
+req.name:$req.name
+<br/>
+$req.getSession()
+<br/>
+ses.name:$ses.name
+<br/>
+app.name:$app.name
+<br/>
+///////////////////////<br/>
+看看中文会乱码么?<br/>
+name in action.user : $user.name<br/>
+name in action.user : $act.user.name
+</body>
+<html>

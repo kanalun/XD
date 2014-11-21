@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.allscore.npayagent.dto">
+	<!--映射MAP -___-!!!请注意:由QCC DBtools 生成,你应该本着负责的精神仔细检查一遍,bala!bala! -->
+	<resultMap id="PosOrderPay" type="com.allscore.npayagent.dto.PosOrderPay">
+		<result property="status" column="STATUS" />
+		<result property="transactionType" column="TRANSACTION_TYPE" />
+		<result property="payfeeSettleFlag" column="PAYFEE_SETTLE_FLAG" />
+		<result property="payfeeSettleTime" column="PAYFEE_SETTLE_TIME" />
+		<result property="contactName" column="CONTACT_NAME" />
+		<result property="phone" column="PHONE" />
+		<result property="refundDate" column="REFUND_DATE" />
+		<result property="id" column="ID" />
+		<result property="innerOrderid" column="INNER_ORDERID" />
+		<result property="orderInfoId" column="ORDER_INFO_ID" />
+		<result property="merchantid" column="MERCHANTID" />
+		<result property="terminalid" column="TERMINALID" />
+		<result property="transactionNo" column="TRANSACTION_NO" />
+		<result property="transactionDate" column="TRANSACTION_DATE" />
+		<result property="payAmount" column="PAY_AMOUNT" />
+		<result property="currency" column="CURRENCY" />
+		<result property="cardNo" column="CARD_NO" />
+		<result property="cardType" column="CARD_TYPE" />
+		<result property="bank" column="BANK" />
+		<result property="bankNo" column="BANK_NO" />
+		<result property="settlementDate" column="SETTLEMENT_DATE" />
+		<result property="batchNo" column="BATCH_NO" />
+		<result property="description" column="DESCRIPTION" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="returnableAmt" column="RETURNABLE_AMT" />
+		<result property="oriPayAmount" column="ORI_PAY_AMOUNT" />
+		<result property="noticeStatus" column="NOTICE_STATUS" />
+		<result property="nextNoticeTime" column="NEXT_NOTICE_TIME" />
+		<result property="noticeTimes" column="NOTICE_TIMES" />
+		<result property="payFee" column="PAY_FEE" />
+		<result property="netAmount" column="NET_AMOUNT" />
+		<result property="refundTransNo" column="REFUND_TRANS_NO" />
+		<result property="amtPoolStatus" column="AMT_POOL_STATUS" />
+	</resultMap>
+	<!--SELECT 片段,包含了所有字段 -___-!!!请注意:由QCC DBtools 生成,你应该本着负责的精神仔细检查一遍,bala!bala! -->
+	<sql id="POS_ORDER_PAY_COLUMNS">
+		<!--0 null -->
+		STATUS,
+		<!--1 null -->
+		TRANSACTION_TYPE,
+		<!--2 null -->
+		PAYFEE_SETTLE_FLAG,
+		<!--3 null -->
+		PAYFEE_SETTLE_TIME,
+		<!--4 null -->
+		CONTACT_NAME,
+		<!--5 null -->
+		PHONE,
+		<!--6 null -->
+		REFUND_DATE,
+		<!--7 null -->
+		ID,
+		<!--8 null -->
+		INNER_ORDERID,
+		<!--9 null -->
+		ORDER_INFO_ID,
+		<!--10 null -->
+		MERCHANTID,
+		<!--11 null -->
+		TERMINALID,
+		<!--12 null -->
+		TRANSACTION_NO,
+		<!--13 null -->
+		TRANSACTION_DATE,
+		<!--14 null -->
+		PAY_AMOUNT,
+		<!--15 null -->
+		CURRENCY,
+		<!--16 null -->
+		CARD_NO,
+		<!--17 null -->
+		CARD_TYPE,
+		<!--18 null -->
+		BANK,
+		<!--19 null -->
+		BANK_NO,
+		<!--20 null -->
+		SETTLEMENT_DATE,
+		<!--21 null -->
+		BATCH_NO,
+		<!--22 null -->
+		DESCRIPTION,
+		<!--23 null -->
+		CREATE_DATE,
+		<!--24 null -->
+		RETURNABLE_AMT,
+		<!--25 null -->
+		ORI_PAY_AMOUNT,
+		<!--26 null -->
+		NOTICE_STATUS,
+		<!--27 null -->
+		NEXT_NOTICE_TIME,
+		<!--28 null -->
+		NOTICE_TIMES,
+		<!--29 null -->
+		PAY_FEE,
+		<!--30 null -->
+		NET_AMOUNT,
+		<!--31 null -->
+		REFUND_TRANS_NO,AMT_POOL_STATUS
+	</sql>
+	<insert id="insertSelective">
+		INSERT INTO POS_ORDER_PAY
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="status != null and status != ''">STATUS,</if>
+			<if test="transactionType != null and transactionType != ''">TRANSACTION_TYPE,</if>
+			<if test="payfeeSettleFlag != null and payfeeSettleFlag != ''">PAYFEE_SETTLE_FLAG,</if>
+			<if test="payfeeSettleTime != null">PAYFEE_SETTLE_TIME,</if>
+			<if test="contactName != null and contactName != ''">CONTACT_NAME,</if>
+			<if test="phone != null and phone != ''">PHONE,</if>
+			<if test="refundDate != null">REFUND_DATE,</if>
+			<if test="id != null">ID,</if>
+			<if test="innerOrderid != null and innerOrderid != ''">INNER_ORDERID,</if>
+			<if test="orderInfoId != null and orderInfoId != ''">ORDER_INFO_ID,</if>
+			<if test="merchantid != null and merchantid != ''">MERCHANTID,</if>
+			<if test="terminalid != null and terminalid != ''">TERMINALID,</if>
+			<if test="transactionNo != null and transactionNo != ''">TRANSACTION_NO,</if>
+			<if test="transactionDate != null and transactionDate != ''">TRANSACTION_DATE,</if>
+			<if test="payAmount != null">PAY_AMOUNT,</if>
+			<if test="currency != null and currency != ''">CURRENCY,</if>
+			<if test="cardNo != null and cardNo != ''">CARD_NO,</if>
+			<if test="cardType != null and cardType != ''">CARD_TYPE,</if>
+			<if test="bank != null and bank != ''">BANK,</if>
+			<if test="bankNo != null and bankNo != ''">BANK_NO,</if>
+			<if test="settlementDate != null and settlementDate != ''">SETTLEMENT_DATE,</if>
+			<if test="batchNo != null and batchNo != ''">BATCH_NO,</if>
+			<if test="description != null and description != ''">DESCRIPTION,</if>
+			<if test="createDate != null">CREATE_DATE,</if>
+			<if test="returnableAmt != null">RETURNABLE_AMT,</if>
+			<if test="oriPayAmount != null">ORI_PAY_AMOUNT,</if>
+			<if test="noticeStatus != null and noticeStatus != ''">NOTICE_STATUS,</if>
+			<if test="nextNoticeTime != null">NEXT_NOTICE_TIME,</if>
+			<if test="noticeTimes != null and noticeTimes != ''">NOTICE_TIMES,</if>
+			<if test="payFee != null">PAY_FEE,</if>
+			<if test="netAmount != null">NET_AMOUNT,</if>
+			<if test="refundTransNo != null and refundTransNo != ''">REFUND_TRANS_NO,</if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test="status != null and status != ''">#{status, jdbcType=VARCHAR},</if>
+			<if test="transactionType != null and transactionType != ''">#{transactionType, jdbcType=VARCHAR},</if>
+			<if test="payfeeSettleFlag != null and payfeeSettleFlag != ''">#{payfeeSettleFlag, jdbcType=VARCHAR},</if>
+			<if test="payfeeSettleTime != null">#{payfeeSettleTime, jdbcType=DATE},</if>
+			<if test="contactName != null and contactName != ''">#{contactName, jdbcType=VARCHAR},</if>
+			<if test="phone != null and phone != ''">#{phone, jdbcType=VARCHAR},</if>
+			<if test="refundDate != null">#{refundDate, jdbcType=DATE},</if>
+			<if test="id != null">#{id, jdbcType=NUMERIC},</if>
+			<if test="innerOrderid != null and innerOrderid != ''">#{innerOrderid, jdbcType=VARCHAR},</if>
+			<if test="orderInfoId != null and orderInfoId != ''">#{orderInfoId, jdbcType=VARCHAR},</if>
+			<if test="merchantid != null and merchantid != ''">#{merchantid, jdbcType=VARCHAR},</if>
+			<if test="terminalid != null and terminalid != ''">#{terminalid, jdbcType=VARCHAR},</if>
+			<if test="transactionNo != null and transactionNo != ''">#{transactionNo, jdbcType=VARCHAR},</if>
+			<if test="transactionDate != null and transactionDate != ''">#{transactionDate, jdbcType=VARCHAR},</if>
+			<if test="payAmount != null">#{payAmount, jdbcType=NUMERIC},</if>
+			<if test="currency != null and currency != ''">#{currency, jdbcType=VARCHAR},</if>
+			<if test="cardNo != null and cardNo != ''">#{cardNo, jdbcType=VARCHAR},</if>
+			<if test="cardType != null and cardType != ''">#{cardType, jdbcType=VARCHAR},</if>
+			<if test="bank != null and bank != ''">#{bank, jdbcType=VARCHAR},</if>
+			<if test="bankNo != null and bankNo != ''">#{bankNo, jdbcType=VARCHAR},</if>
+			<if test="settlementDate != null and settlementDate != ''">#{settlementDate, jdbcType=VARCHAR},</if>
+			<if test="batchNo != null and batchNo != ''">#{batchNo, jdbcType=VARCHAR},</if>
+			<if test="description != null and description != ''">#{description, jdbcType=VARCHAR},</if>
+			<if test="createDate != null">#{createDate, jdbcType=DATE},</if>
+			<if test="returnableAmt != null">#{returnableAmt, jdbcType=NUMERIC},</if>
+			<if test="oriPayAmount != null">#{oriPayAmount, jdbcType=NUMERIC},</if>
+			<if test="noticeStatus != null and noticeStatus != ''">#{noticeStatus, jdbcType=VARCHAR},</if>
+			<if test="nextNoticeTime != null">#{nextNoticeTime, jdbcType=DATE},</if>
+			<if test="noticeTimes != null and noticeTimes != ''">#{noticeTimes, jdbcType=VARCHAR},</if>
+			<if test="payFee != null">#{payFee, jdbcType=NUMERIC},</if>
+			<if test="netAmount != null">#{netAmount, jdbcType=NUMERIC},</if>
+			<if test="refundTransNo != null and refundTransNo != ''">#{refundTransNo, jdbcType=VARCHAR},</if>
+		</trim>
+	</insert>
+	<insert id="insert">
+		INSERT INTO POS_ORDER_PAY (
+		<!--0 -->
+		STATUS,
+		<!--1 -->
+		TRANSACTION_TYPE,
+		<!--2 -->
+		PAYFEE_SETTLE_FLAG,
+		<!--3 -->
+		PAYFEE_SETTLE_TIME,
+		<!--4 -->
+		CONTACT_NAME,
+		<!--5 -->
+		PHONE,
+		<!--6 -->
+		REFUND_DATE,
+		<!--7 -->
+		ID,
+		<!--8 -->
+		INNER_ORDERID,
+		<!--9 -->
+		ORDER_INFO_ID,
+		<!--10 -->
+		MERCHANTID,
+		<!--11 -->
+		TERMINALID,
+		<!--12 -->
+		TRANSACTION_NO,
+		<!--13 -->
+		TRANSACTION_DATE,
+		<!--14 -->
+		PAY_AMOUNT,
+		<!--15 -->
+		CURRENCY,
+		<!--16 -->
+		CARD_NO,
+		<!--17 -->
+		CARD_TYPE,
+		<!--18 -->
+		BANK,
+		<!--19 -->
+		BANK_NO,
+		<!--20 -->
+		SETTLEMENT_DATE,
+		<!--21 -->
+		BATCH_NO,
+		<!--22 -->
+		DESCRIPTION,
+		<!--23 -->
+		CREATE_DATE,
+		<!--24 -->
+		RETURNABLE_AMT,
+		<!--25 -->
+		ORI_PAY_AMOUNT,
+		<!--26 -->
+		NOTICE_STATUS,
+		<!--27 -->
+		NEXT_NOTICE_TIME,
+		<!--28 -->
+		NOTICE_TIMES,
+		<!--29 -->
+		PAY_FEE,
+		<!--30 -->
+		NET_AMOUNT,
+		<!--31 -->
+		REFUND_TRANS_NO, AMT_POOL_STATUS ) VALUES (#{status,
+		jdbcType=VARCHAR}, #{transactionType, jdbcType=VARCHAR},
+		#{payfeeSettleFlag, jdbcType=VARCHAR}, #{payfeeSettleTime,
+		jdbcType=DATE}, #{contactName, jdbcType=VARCHAR}, #{phone,
+		jdbcType=VARCHAR}, #{refundDate, jdbcType=DATE}, #{id,
+		jdbcType=NUMERIC}, #{innerOrderid, jdbcType=VARCHAR}, #{orderInfoId,
+		jdbcType=VARCHAR}, #{merchantid, jdbcType=VARCHAR}, #{terminalid,
+		jdbcType=VARCHAR}, #{transactionNo, jdbcType=VARCHAR},
+		#{transactionDate, jdbcType=VARCHAR}, #{payAmount, jdbcType=NUMERIC},
+		#{currency, jdbcType=VARCHAR}, #{cardNo, jdbcType=VARCHAR},
+		#{cardType, jdbcType=VARCHAR}, #{bank, jdbcType=VARCHAR}, #{bankNo,
+		jdbcType=VARCHAR}, #{settlementDate, jdbcType=VARCHAR}, #{batchNo,
+		jdbcType=VARCHAR}, #{description, jdbcType=VARCHAR}, #{createDate,
+		jdbcType=DATE}, #{returnableAmt, jdbcType=NUMERIC}, #{oriPayAmount,
+		jdbcType=NUMERIC}, #{noticeStatus, jdbcType=VARCHAR},
+		#{nextNoticeTime, jdbcType=DATE}, #{noticeTimes, jdbcType=VARCHAR},
+		#{payFee, jdbcType=NUMERIC}, #{netAmount, jdbcType=NUMERIC},
+		#{refundTransNo, jdbcType=VARCHAR}, #{amtPoolStatus, jdbcType=VARCHAR}
+		)
+	</insert>
+	<!--通过主键获得数据 -___-!!!请注意:由QCC DBtools 生成,你应该本着负责的精神仔细检查一遍,bala!bala! -->
+	<select id="getByPrimaryKey">
+		SELECT
+		<include refid="POS_ORDER_PAY_COLUMNS" />
+		FROM POS_ORDER_PAY WHERE ID = #{0}
+	</select>
+	<!--通过主键获得数据 -___-!!!请注意:由QCC DBtools 生成,你应该本着负责的精神仔细检查一遍,bala!bala! -->
+	<delete id="deleteByPrimaryKey">DELETE FROM POS_ORDER_PAY WHERE ID = #{0}</delete>
+	<select id="query">
+		<!--START PAGE HEAD -->
+		<if test="max!=null">SELECT * FROM (</if>
+		<if test="first!=null">SELECT * FROM (</if>
+		SELECT
+		t.STATUS,t.TRANSACTION_TYPE,t.PAYFEE_SETTLE_FLAG,t.PAYFEE_SETTLE_TIME,t.CONTACT_NAME,t.PHONE,t.REFUND_DATE,t.ID,t.INNER_ORDERID,t.ORDER_INFO_ID,t.MERCHANTID,t.TERMINALID,t.TRANSACTION_NO,t.TRANSACTION_DATE,t.PAY_AMOUNT,t.CURRENCY,t.CARD_NO,t.CARD_TYPE,t.BANK,t.BANK_NO,t.SETTLEMENT_DATE,t.BATCH_NO,t.DESCRIPTION,t.CREATE_DATE,t.RETURNABLE_AMT,t.ORI_PAY_AMOUNT,t.NOTICE_STATUS,t.NEXT_NOTICE_TIME,t.NOTICE_TIMES,t.PAY_FEE,t.NET_AMOUNT,t.REFUND_TRANS_NO,t.AMT_POOL_STATUS
+		, row_number() OVER(ORDER BY null) AS "row_number" FROM POS_ORDER_PAY
+		<!--END OF PAGE HEAD -->
+		<!--STAET WHERE -->
+		WHERE
+		<if test="status != null and status != ''">STATUS = #{status}</if>
+		<if test="transactionType != null and transactionType != ''">AND TRANSACTION_TYPE = #{transactionType}</if>
+		<if test="payfeeSettleFlag != null and payfeeSettleFlag != ''">AND PAYFEE_SETTLE_FLAG = #{payfeeSettleFlag}</if>
+		<if test="payfeeSettleTime != null">AND PAYFEE_SETTLE_TIME = #{payfeeSettleTime}</if>
+		<if test="contactName != null and contactName != ''">AND CONTACT_NAME = #{contactName}</if>
+		<if test="phone != null and phone != ''">AND PHONE = #{phone}</if>
+		<if test="refundDate != null">AND REFUND_DATE = #{refundDate}</if>
+		<if test="id != null">AND ID = #{id}</if>
+		<if test="innerOrderid != null and innerOrderid != ''">AND INNER_ORDERID = #{innerOrderid}</if>
+		<if test="orderInfoId != null and orderInfoId != ''">AND ORDER_INFO_ID = #{orderInfoId}</if>
+		<if test="merchantid != null and merchantid != ''">AND MERCHANTID = #{merchantid}</if>
+		<if test="terminalid != null and terminalid != ''">AND TERMINALID = #{terminalid}</if>
+		<if test="transactionNo != null and transactionNo != ''">AND TRANSACTION_NO = #{transactionNo}</if>
+		<if test="transactionDate != null and transactionDate != ''">AND TRANSACTION_DATE = #{transactionDate}</if>
+		<if test="payAmount != null">AND PAY_AMOUNT = #{payAmount}</if>
+		<if test="currency != null and currency != ''">AND CURRENCY = #{currency}</if>
+		<if test="cardNo != null and cardNo != ''">AND CARD_NO = #{cardNo}</if>
+		<if test="cardType != null and cardType != ''">AND CARD_TYPE = #{cardType}</if>
+		<if test="bank != null and bank != ''">AND BANK = #{bank}</if>
+		<if test="bankNo != null and bankNo != ''">AND BANK_NO = #{bankNo}</if>
+		<if test="settlementDate != null and settlementDate != ''">AND SETTLEMENT_DATE = #{settlementDate}</if>
+		<if test="batchNo != null and batchNo != ''">AND BATCH_NO = #{batchNo}</if>
+		<if test="description != null and description != ''">AND DESCRIPTION = #{description}</if>
+		<if test="createDate != null">AND CREATE_DATE = #{createDate}</if>
+		<if test="returnableAmt != null">AND RETURNABLE_AMT = #{returnableAmt}</if>
+		<if test="oriPayAmount != null">AND ORI_PAY_AMOUNT = #{oriPayAmount}</if>
+		<if test="noticeStatus != null and noticeStatus != ''">AND NOTICE_STATUS = #{noticeStatus}</if>
+		<if test="nextNoticeTime != null">AND NEXT_NOTICE_TIME = #{nextNoticeTime}</if>
+		<if test="noticeTimes != null and noticeTimes != ''">AND NOTICE_TIMES = #{noticeTimes}</if>
+		<if test="payFee != null">AND PAY_FEE = #{payFee}</if>
+		<if test="netAmount != null">AND NET_AMOUNT = #{netAmount}</if>
+		<if test="refundTransNo != null and refundTransNo != ''">AND REFUND_TRANS_NO = #{refundTransNo}</if>
+		<if test="amtPoolStatus != null and amtPoolStatus != ''">AND AMT_POOL_STATUS = #{amtPoolStatus}</if>
+		<!--END OF WHERE -->
+		<!--START PAGE FOOT -->
+		<if test="first!=null">) p WHERE p."row_number" &gt; #{first}</if>
+		<if test="max!=null">) q WHERE rownum &lt;= #{max}</if>
+		<!--END OF PAGE FOOT -->
+	</select>
+</mapper>
+
