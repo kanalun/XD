@@ -11,8 +11,6 @@
 		<module>xd-coal</module>
 		<module>xd-commons</module>
 		<module>xd-deploy</module>
-		<module>xd-lab</module>
-		<module>xd-log</module>
 		<module>xd-mvc</module>
 	</modules>
 </project>

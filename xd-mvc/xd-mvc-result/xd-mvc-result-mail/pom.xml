@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.xindian</groupId>
-		<artifactId>XD</artifactId>
+		<artifactId>xd-mvc-result</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>xd-mvc-result-default</artifactId>
+	<artifactId>xd-mvc-result-mail</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
