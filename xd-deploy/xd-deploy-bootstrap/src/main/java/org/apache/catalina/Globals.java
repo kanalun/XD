@@ -27,19 +27,6 @@ package org.apache.catalina;
 public final class Globals
 {
 	/**
-	 * The servlet context attribute under which we store the alternate
-	 * deployment descriptor for this web application
-	 */
-	public static final String ALT_DD_ATTR = "org.apache.catalina.deploy.alt_dd";
-
-	/**
-	 * The request attribute under which we store the array of X509Certificate
-	 * objects representing the certificate chain presented by our client, if
-	 * any.
-	 */
-	public static final String CERTIFICATES_ATTR = "javax.servlet.request.X509Certificate";
-
-	/**
 	 * The request attribute under which we store the name of the cipher suite
 	 * being used on an SSL connection (as an object of type java.lang.String).
 	 */
@@ -79,37 +66,12 @@ public final class Globals
 	 * this SSL connection (as an object of type java.lang.String).
 	 */
 	public static final String SSL_SESSION_ID_ATTR = "javax.servlet.request.ssl_session_id";
-	/**
-	 * Tomcat specific attribute as used in Tomcat 6.
-	 * 
-	 * @deprecated
-	 */
-	@Deprecated
-	public static final String SSL_SESSION_ID_TOMCAT_ATTR = "javax.servlet.request.ssl_session";
 
 	/**
 	 * The request attribute key for the session manager. This one is a Tomcat
 	 * extension to the Servlet spec.
 	 */
 	public static final String SSL_SESSION_MGR_ATTR = "javax.servlet.request.ssl_session_mgr";
-
-	/**
-	 * The servlet context attribute under which the managed bean Registry will
-	 * be stored for privileged contexts (if enabled).
-	 * 
-	 * @deprecated Unused. Will be removed in Tomcat 8.0.x.
-	 */
-	@Deprecated
-	public static final String MBEAN_REGISTRY_ATTR = "org.apache.catalina.Registry";
-
-	/**
-	 * The servlet context attribute under which the MBeanServer will be stored
-	 * for privileged contexts (if enabled).
-	 * 
-	 * @deprecated Unused. Will be removed in Tomcat 8.0.x.
-	 */
-	@Deprecated
-	public static final String MBEAN_SERVER_ATTR = "org.apache.catalina.MBeanServer";
 
 	/**
 	 * The request attribute under which we store the servlet name on a named
