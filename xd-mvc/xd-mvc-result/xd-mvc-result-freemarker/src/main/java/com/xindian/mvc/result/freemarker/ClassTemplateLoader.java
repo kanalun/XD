@@ -2,7 +2,7 @@ package com.xindian.mvc.result.freemarker;
 
 import java.net.URL;
 
-import com.xindian.mvc.utils.ClassLoaderUtils;
+import com.xindian.commons.utils.ClassLoaderUtils;
 
 import freemarker.cache.URLTemplateLoader;
 

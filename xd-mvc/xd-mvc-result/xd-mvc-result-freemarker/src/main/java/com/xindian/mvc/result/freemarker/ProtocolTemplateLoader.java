@@ -5,7 +5,7 @@ import java.io.Reader;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.xindian.mvc.utils.Validator;
+import com.xindian.commons.utils.Validator;
 
 import freemarker.cache.TemplateLoader;
 

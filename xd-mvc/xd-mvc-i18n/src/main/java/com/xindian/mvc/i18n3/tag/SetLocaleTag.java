@@ -11,8 +11,8 @@ import javax.servlet.jsp.tagext.TagSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.xindian.commons.utils.LocaleUtils;
 import com.xindian.mvc.i18n2.HttpLocaleProviderSupport;
-import com.xindian.mvc.utils.LocaleUtils;
 
 /**
  * SetLocale TODO 加入scope page

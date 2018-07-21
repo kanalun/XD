@@ -22,7 +22,6 @@ import com.xindian.mvc.result.ResultHandler;
  * 用注解实现配置
  * 
  * @author Elva
- * 
  * @param <T>
  */
 public class ActionMeta<T> implements IActionMeta<T>
@@ -91,14 +90,15 @@ public class ActionMeta<T> implements IActionMeta<T>
 		{
 			if (Modifier.isPublic(m1.getModifiers()))
 			{
-				logger.debug("Method:----" + m1);
+				logger.debug("Method:" + m1);
 				MethodMeta meta = MethodMeta.get(this, m1);
 				methodMetas.put(meta.getMethodName(), meta);
 			}
 		}
 		if (actionClass.isAnnotationPresent(DefaultResultHandler.class))
 		{
-			defaultResultHandlerType = actionClass.getAnnotation(DefaultResultHandler.class).value();
+			defaultResultHandlerType = actionClass.getAnnotation(DefaultResultHandler.class)
+					.value();
 		}
 		// Forbidden
 		if (actionClass.isAnnotationPresent(Forbidden.class))
@@ -120,16 +120,19 @@ public class ActionMeta<T> implements IActionMeta<T>
 		}
 	}
 
+	@Override
 	public boolean isForbidden()
 	{
 		return forbiddenMeta != null;
 	}
 
+	@Override
 	public ForbiddenMeta getForbiddenMeta()
 	{
 		return forbiddenMeta;
 	}
 
+	@Override
 	public Class<T> getActionClass()
 	{
 		return actionClass;
@@ -140,6 +143,7 @@ public class ActionMeta<T> implements IActionMeta<T>
 		this.actionClass = actionClass;
 	}
 
+	@Override
 	public String getActionName()
 	{
 		return actionName;
@@ -150,6 +154,7 @@ public class ActionMeta<T> implements IActionMeta<T>
 		this.actionName = actionName;
 	}
 
+	@Override
 	public String getNamespace()
 	{
 		return namespace;
@@ -160,16 +165,19 @@ public class ActionMeta<T> implements IActionMeta<T>
 		this.namespace = namespace;
 	}
 
+	@Override
 	public String getDefaultMethodName()
 	{
 		return defaultMethodName;
 	}
 
+	@Override
 	public void setDefaultMethodName(String defaultMethodName)
 	{
 		this.defaultMethodName = defaultMethodName;
 	}
 
+	@Override
 	public MethodMeta getMethodMeta(String methodname)
 	{
 		return methodMetas.get(methodname);
@@ -180,7 +188,9 @@ public class ActionMeta<T> implements IActionMeta<T>
 		return methodMetas.get(getDefaultMethodName());
 	}
 
-	public void invokeBefores() throws VoteException, InstantiationException, IllegalAccessException
+	@Override
+	public void invokeBefores() throws VoteException, InstantiationException,
+			IllegalAccessException
 	{
 		if (before != null)
 		{
@@ -191,6 +201,7 @@ public class ActionMeta<T> implements IActionMeta<T>
 		}
 	}
 
+	@Override
 	public void invokeAfters() throws VoteException, InstantiationException, IllegalAccessException
 	{
 		if (after != null)

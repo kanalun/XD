@@ -13,22 +13,16 @@ import javax.servlet.ServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.xindian.commons.utils.Validator;
 import com.xindian.mvc.ActionContext;
 import com.xindian.mvc.ActionContextManager;
-import com.xindian.mvc.ExclamationMarkPathTranslator;
-import com.xindian.mvc.GetterSetterMappingFilter;
 import com.xindian.mvc.MVC;
 import com.xindian.mvc.MappingFilter;
 import com.xindian.mvc.PathTranslator;
 import com.xindian.mvc.config.Config;
 import com.xindian.mvc.exception.MVCException;
-import com.xindian.mvc.result.ForwardProtocolParser;
 import com.xindian.mvc.result.ProtocolParserFactory;
-import com.xindian.mvc.result.RedirectProtocolParser;
 import com.xindian.mvc.result.ResultProtocolParser;
-import com.xindian.mvc.result.StringResultProtocolParser;
-
-import com.xindian.mvc.utils.Validator;
 
 /**
  * Servlet Filter implementation class MVCDispatcher
@@ -205,6 +199,7 @@ public class MVCDispatcher implements Filter
 
 
 
+	@Override
 	public void destroy()
 	{
 		/*

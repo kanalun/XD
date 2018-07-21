@@ -11,7 +11,7 @@ package com.xindian.mvc.exception;
  */
 public class PowerlessException extends RuntimeException
 {
-	private static final long serialVersionUID = 9140751411666377147L;
+	private static final long serialVersionUID = 1L;
 
 	public PowerlessException(Throwable e)
 	{
@@ -27,5 +27,4 @@ public class PowerlessException extends RuntimeException
 	{
 		super(message, t);
 	}
-
 }

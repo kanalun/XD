@@ -7,9 +7,10 @@ package com.xindian.mvc.exception;
  * @date 2011-1-27
  * @version 1.0
  */
-@SuppressWarnings("serial")
 public class BuildActionException extends RuntimeException
 {
+	private static final long serialVersionUID = 1L;
+
 	public BuildActionException(String string)
 	{
 		super(string);

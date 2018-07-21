@@ -1,10 +1,10 @@
 package com.xindian.ioc.test;
 
+import com.xindian.commons.promise.Singleton;
+import com.xindian.commons.promise.ThreadSafe;
 import com.xindian.ioc.annotation.Implementation;
 import com.xindian.ioc.annotation.Scope;
 import com.xindian.ioc.annotation.ScopeType;
-import com.xindian.ioc.promise.Singleton;
-import com.xindian.ioc.promise.ThreadSafe;
 
 /**
  * @author Elva

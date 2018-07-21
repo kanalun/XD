@@ -19,10 +19,10 @@ import org.apache.velocity.util.SimplePool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.xindian.commons.utils.ClassLoaderUtils;
 import com.xindian.mvc.ActionContext;
 import com.xindian.mvc.result.AbstractResultHandler;
 import com.xindian.mvc.result.ResultHandler;
-import com.xindian.mvc.utils.ClassLoaderUtils;
 
 /**
  * 

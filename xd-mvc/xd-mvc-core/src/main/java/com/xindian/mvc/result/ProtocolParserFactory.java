@@ -3,7 +3,7 @@ package com.xindian.mvc.result;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.xindian.mvc.utils.Validator;
+import com.xindian.commons.utils.Validator;
 
 /**
  * 管理和存放返回结果协议解析器<br/>

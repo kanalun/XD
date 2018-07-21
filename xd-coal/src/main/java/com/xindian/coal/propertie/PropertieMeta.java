@@ -11,11 +11,11 @@ public class PropertieMeta implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	private String comment;
+	String comment;
 
-	private String key;
+	String key;
 
-	private String value;
+	String value;
 
 	public String getComment()
 	{

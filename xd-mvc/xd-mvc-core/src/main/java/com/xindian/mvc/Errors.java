@@ -60,12 +60,4 @@ public class Errors
 		}
 		typedErrorMap.put(key, error);
 	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args)
-	{
-	}
-
 }

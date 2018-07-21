@@ -1,6 +1,6 @@
 package com.xindian.mvc.test;
 
-import com.xindian.mvc.i18n3.Randoms;
+import com.xindian.commons.i18n.Randoms;
 
 /**
  * 测试随机

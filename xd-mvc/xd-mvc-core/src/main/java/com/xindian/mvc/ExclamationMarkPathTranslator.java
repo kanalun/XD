@@ -8,12 +8,12 @@ import com.xindian.mvc.exception.PowerlessException;
 
 /**
  * 感叹号路径翻译:http://www.domin.com/PackageName/ActionName!Method.EXT?[queryString]
+ * 
  * TODO 这个东东需要"测试"
  * 
  * 存在已知的错误!
  * 
  * @author Elva
- * 
  */
 public class ExclamationMarkPathTranslator implements PathTranslator
 {
@@ -34,18 +34,12 @@ public class ExclamationMarkPathTranslator implements PathTranslator
 	public Mapping translate(String requestURI) throws PowerlessException, ErrorCodeException
 	{
 		String p = ActionContext.getRequest().getServletPath();
-
 		String[] path = p.split("/"); // requestURI.split("/");
-
 		String namespace = null;
-
 		String actionName = null;
-
 		String methodName = null;
-
 		for (String pathPart : path)
 		{
-			// System.out.println(pathPart);
 			if (pathPart.endsWith("." + ext))
 			{
 				try
@@ -62,7 +56,8 @@ public class ExclamationMarkPathTranslator implements PathTranslator
 				try
 				{
 					actionName = pathPart.substring(0, pathPart.indexOf("!"));
-					methodName = pathPart.substring(pathPart.indexOf("!") + 1, pathPart.indexOf("."));
+					methodName = pathPart.substring(pathPart.indexOf("!") + 1,
+							pathPart.indexOf("."));
 				} catch (IndexOutOfBoundsException exception)
 				{
 					actionName = pathPart.substring(0, pathPart.indexOf("." + ext));
@@ -71,9 +66,7 @@ public class ExclamationMarkPathTranslator implements PathTranslator
 
 				// System.out.print("PACKAGE = " + requestURI.substring(0,
 				// requestURI.indexOf(pathPart)));
-
 				// System.out.print(" ACTION = " + actionName);
-
 				// System.out.println(" METHOD = " + methodName);
 				break;
 			}

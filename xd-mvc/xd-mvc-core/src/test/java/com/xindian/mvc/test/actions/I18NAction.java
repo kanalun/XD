@@ -15,7 +15,6 @@ public class I18NAction extends ActionSupport
 	public String a()
 	{
 		// testConstants.age();
-
 		// testConstants.x("test", new Date());
 		return "string://" + getText("hello");
 	}

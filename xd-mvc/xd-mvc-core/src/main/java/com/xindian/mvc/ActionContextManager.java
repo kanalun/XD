@@ -19,14 +19,9 @@ import com.xindian.mvc.utils.RequestUtils;
 /**
  * ActionContext 管理器,负责创建,回收ActionContext;
  * 
- * 添加全局监听等功能@
- * 
- * 负责扩展改变ActionContext,比如添加文件上传功能
- * 
- * 程序性单例
+ * 添加全局监听等功能@ 负责扩展改变ActionContext,比如添加文件上传功能 程序性单例
  * 
  * @author Elva
- * 
  */
 public class ActionContextManager
 {
@@ -89,13 +84,15 @@ public class ActionContextManager
 
 	// TODO
 	// 注册 ActionContextListener类型
-	private boolean registerGlobalActionContextListener(Class<? extends ActionContextListener> actionContextListenerType)
+	private boolean registerGlobalActionContextListener(
+			Class<? extends ActionContextListener> actionContextListenerType)
 	{
 		return false;
 	}
 
 	// TODO
-	private boolean unregisterGlobalActionContextListener(Class<? extends ActionContextListener> actionContextListenerType)
+	private boolean unregisterGlobalActionContextListener(
+			Class<? extends ActionContextListener> actionContextListenerType)
 	{
 		return false;
 	}
@@ -117,18 +114,20 @@ public class ActionContextManager
 
 	private int fileUploadMaxSize = 1024 * 1024;// TODO
 
-	public ActionContext createActionContext(ServletContext servletContext, ServletRequest request, ServletResponse response)
-			throws IOException
+	public ActionContext createActionContext(ServletContext servletContext, ServletRequest request,
+			ServletResponse response) throws IOException
 	{
 		ActionContext actionContext;
 		if (RequestUtils.isMultipart((HttpServletRequest) request))
 		{
-			COSMultipartRequest multipartRequest = new COSMultipartRequest((HttpServletRequest) request, tempDir,
-					fileUploadMaxSize, encoding);
-			actionContext = _createActionContext(servletContext, multipartRequest, (HttpServletResponse) response);
+			COSMultipartRequest multipartRequest = new COSMultipartRequest(
+					(HttpServletRequest) request, tempDir, fileUploadMaxSize, encoding);
+			actionContext = _createActionContext(servletContext, multipartRequest,
+					(HttpServletResponse) response);
 		} else
 		{
-			actionContext = _createActionContext(servletContext, (HttpServletRequest) request, (HttpServletResponse) response);
+			actionContext = _createActionContext(servletContext, (HttpServletRequest) request,
+					(HttpServletResponse) response);
 		}
 		fireAfterActionContextCreated(actionContext);
 		return actionContext;
@@ -141,8 +140,8 @@ public class ActionContextManager
 	 * @param response
 	 * @return
 	 */
-	private ActionContext _createActionContext(ServletContext servletContext, HttpServletRequest request,
-			HttpServletResponse response)
+	private ActionContext _createActionContext(ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
 	{
 		ActionContext actionContext = new ActionContext();
 		actionContext.context = servletContext;

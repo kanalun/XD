@@ -78,9 +78,8 @@ public class TestAction
 	private Map<String, Object> map;
 
 	private Set<String> set;
-
-	@Constant
 	// 常量注入?
+	@Constant
 	private String constant;
 
 	@ReturnedValue
@@ -149,11 +148,13 @@ public class TestAction
 	public String x()
 	{
 		StringBuffer stringBuffer = new StringBuffer();
-		stringBuffer.append(ActionContext.getRequest().getMethod()).append(ActionContext.getRequest().getRequestURI())
+		stringBuffer.append(ActionContext.getRequest().getMethod())
+				.append(ActionContext.getRequest().getRequestURI())
 				.append(ActionContext.getRequest().getQueryString());
 		return "string://" + "URI: " + ActionContext.getRequest().getRequestURI() + "\nURL: "
-				+ ActionContext.getRequest().getRequestURL() + "\n" + stringBuffer + "\nContextPath: "
-				+ ActionContext.getRequest().getContextPath() + "\nServletPath: " + ActionContext.getRequest().getServletPath();
+				+ ActionContext.getRequest().getRequestURL() + "\n" + stringBuffer
+				+ "\nContextPath: " + ActionContext.getRequest().getContextPath()
+				+ "\nServletPath: " + ActionContext.getRequest().getServletPath();
 	}
 
 	public String defaultMethod()

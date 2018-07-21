@@ -25,6 +25,7 @@ public class NormalPathTranslator implements PathTranslator
 
 	public NormalPathTranslator()
 	{
+		// EMPTY
 	}
 
 	@Override

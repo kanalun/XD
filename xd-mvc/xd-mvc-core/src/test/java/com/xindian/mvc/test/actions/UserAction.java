@@ -1,5 +1,6 @@
 package com.xindian.mvc.test.actions;
 
+import com.xindian.commons.utils.Validator;
 import com.xindian.mvc.ActionContext;
 import com.xindian.mvc.annotation.Action;
 import com.xindian.mvc.annotation.Before;
@@ -11,7 +12,6 @@ import com.xindian.mvc.result.Forward;
 import com.xindian.mvc.result.Redirect;
 import com.xindian.mvc.test.User;
 import com.xindian.mvc.utils.FileItem;
-import com.xindian.mvc.utils.Validator;
 import com.xindian.mvc.validation.Validation.Required;
 
 /**

@@ -15,8 +15,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 编码过滤器
  * 
- * @author cc
- * 
+ * @author qcc
  */
 public class EncodingFilter implements Filter
 {
@@ -32,22 +31,18 @@ public class EncodingFilter implements Filter
 		{
 			this.encoding = "utf-8";
 			logger.warn("FilterConfig 中没有对编码进行配置,系统使用默认的编码:[" + encoding + "]");
-			// System.err.println("FilterConfig 中没有对编码进行配置,系统使用默认的编码:" +
-			// encoding);
 		}
 		logger.info("编码设置为:[" + encoding + "]");
-		// System.err.println("编码设置为:" + encoding);
 	}
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException,
-			ServletException
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
+			throws IOException, ServletException
 	{
 		if (request.getCharacterEncoding() == null)
 		{
 			request.setCharacterEncoding(encoding);
-			// logger.debug("编码设置为:" + encoding);
-			// System.out.println("编码过滤:" + encoding);
+			logger.debug("编码设置为:" + encoding);
 			filterChain.doFilter(request, response);
 		}
 	}

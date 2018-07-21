@@ -5,7 +5,7 @@ import java.io.InputStream;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
-import com.xindian.mvc.utils.ClassLoaderUtils;
+import com.xindian.commons.utils.ClassLoaderUtils;
 
 /**
  * Loads resource from the Thread's context ClassLoader.

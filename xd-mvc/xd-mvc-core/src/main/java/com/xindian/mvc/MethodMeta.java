@@ -10,6 +10,8 @@ import java.util.Map;
 import javassist.NotFoundException;
 
 import com.xindian.beanutils.Bean5;
+import com.xindian.commons.utils.MethodUtils;
+import com.xindian.commons.utils.MethodUtils.MissingLVException;
 import com.xindian.mvc.annotation.After;
 import com.xindian.mvc.annotation.Before;
 import com.xindian.mvc.annotation.DefaultResultHandler;
@@ -20,8 +22,6 @@ import com.xindian.mvc.annotation.Results;
 import com.xindian.mvc.aop.Handler;
 import com.xindian.mvc.exception.VoteException;
 import com.xindian.mvc.result.ResultHandler;
-import com.xindian.mvc.utils.MethodUtils;
-import com.xindian.mvc.utils.MethodUtils.MissingLVException;
 
 /**
  * 存储了配置方法的元数据// TODO 写成一个接口,可以有不同的实现:注解,XML配置....

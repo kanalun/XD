@@ -10,13 +10,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.xindian.commons.promise.Singleton;
+import com.xindian.commons.promise.ThreadSafe;
 import com.xindian.ioc.annotation.Autowired;
 import com.xindian.ioc.annotation.Implementation;
 import com.xindian.ioc.annotation.Scope;
 import com.xindian.ioc.annotation.ScopeType;
 import com.xindian.ioc.exception.IOCException;
-import com.xindian.ioc.promise.Singleton;
-import com.xindian.ioc.promise.ThreadSafe;
 
 /**
  * @author Elva

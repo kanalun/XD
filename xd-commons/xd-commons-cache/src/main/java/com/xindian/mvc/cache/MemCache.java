@@ -3,7 +3,7 @@ package com.xindian.mvc.cache;
 import java.util.Calendar;
 import java.util.List;
 
-import com.danga.MemCached.MemCachedClient;
+import com.whalin.MemCached.MemCachedClient;
 
 /**
  * MemCached

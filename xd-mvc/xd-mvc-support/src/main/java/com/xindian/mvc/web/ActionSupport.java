@@ -8,12 +8,12 @@ import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.xindian.commons.i18n.DefaultTextProvider;
+import com.xindian.commons.i18n.LocaleProvider;
+import com.xindian.commons.i18n.TextProvider;
 import com.xindian.mvc.Errors;
 import com.xindian.mvc.MVCAction;
 import com.xindian.mvc.annotation.Forbidden;
-import com.xindian.mvc.i18n3.DefaultTextProvider;
-import com.xindian.mvc.i18n3.LocaleProvider;
-import com.xindian.mvc.i18n3.TextProvider;
 
 /**
  * @author Elva

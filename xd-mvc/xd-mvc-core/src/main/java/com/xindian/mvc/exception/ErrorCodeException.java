@@ -7,18 +7,16 @@ package com.xindian.mvc.exception;
  * @date 2011-1-16
  * @version 1.0
  */
-@SuppressWarnings("serial")
 public class ErrorCodeException extends RuntimeException
 {
-	private int errorCode;
+	private static final long serialVersionUID = 1L;
 
-	private String message;
+	private int errorCode;
 
 	public ErrorCodeException(int errorCode, String message)
 	{
 		super("ERROR CODE [" + errorCode + "] MESSAGE [ " + message + "]!");
 		this.errorCode = errorCode;
-		this.message = message;
 	}
 
 	public ErrorCodeException(int errorCode)
@@ -30,10 +28,5 @@ public class ErrorCodeException extends RuntimeException
 	public int getErrorCode()
 	{
 		return errorCode;
-	}
-
-	public String getMessage()
-	{
-		return message;
 	}
 }

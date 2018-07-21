@@ -13,8 +13,8 @@ import javax.servlet.jsp.PageContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.xindian.mvc.utils.LocaleUtils;
-import com.xindian.mvc.utils.Validator;
+import com.xindian.commons.utils.LocaleUtils;
+import com.xindian.commons.utils.Validator;
 
 /**
  * 对定制的本地信息读取和设定提供支持

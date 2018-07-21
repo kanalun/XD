@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.xindian.beanutils.Bean5;
+import com.xindian.commons.utils.ConfigUtils;
 import com.xindian.ioc.winte.IoCActionFactory;
 import com.xindian.mvc.exception.ErrorCodeException;
 import com.xindian.mvc.exception.ForbiddenException;
@@ -30,7 +31,6 @@ import com.xindian.mvc.result.ResultHandlerFactory;
 import com.xindian.mvc.result.Resultable;
 import com.xindian.mvc.result.ServletForwardResultHandler;
 import com.xindian.mvc.result.StreamResultHandler;
-import com.xindian.mvc.utils.ConfigUtils;
 
 /**
  * 控制器:系统的核心<br/>

@@ -4,7 +4,6 @@ import com.xindian.mvc.annotation.Forbidden;
 import com.xindian.mvc.exception.ErrorCodeException;
 
 /**
- * 
  * @author Elva
  * @date 2011-3-9
  * @version 1.0
