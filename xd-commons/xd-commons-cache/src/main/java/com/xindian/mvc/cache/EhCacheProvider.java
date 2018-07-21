@@ -1,4 +1,3 @@
-//$Id: EhCacheProvider.java 9964 2006-05-30 15:40:54Z epbernard $
 package com.xindian.mvc.cache;
 
 import java.util.Hashtable;
@@ -8,13 +7,6 @@ import net.sf.ehcache.CacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Cache Provider plugin
- * 
- * Taken from EhCache 1.3 distribution
- * 
- * @author liudong
- */
 public class EhCacheProvider implements CacheProvider
 {
 	private static Logger log = LoggerFactory.getLogger(EhCacheProvider.class);
@@ -31,12 +23,10 @@ public class EhCacheProvider implements CacheProvider
 	 * 
 	 * Configuration will be read from ehcache.xml
 	 * 
-	 * for a cache declaration where the name attribute matches the name
-	 * parameter in this builder.
+	 * for a cache declaration where the name attribute matches the name parameter in this builder.
 	 * 
 	 * @param name
-	 *            the name of the cache. Must match a cache configured in
-	 *            ehcache.xml
+	 *            the name of the cache. Must match a cache configured in ehcache.xml
 	 * @param properties
 	 *            not used
 	 * @return a newly built cache will be built and initialised
@@ -71,8 +61,7 @@ public class EhCacheProvider implements CacheProvider
 	}
 
 	/**
-	 * Callback to perform any necessary initialization of the underlying cache
-	 * implementation during SessionFactory construction.
+	 * Callback to perform any necessary initialization of the underlying cache implementation during SessionFactory construction.
 	 * 
 	 * @param properties
 	 *            current configuration settings.
@@ -91,8 +80,7 @@ public class EhCacheProvider implements CacheProvider
 	}
 
 	/**
-	 * Callback to perform any necessary cleanup of the underlying cache
-	 * implementation during SessionFactory.close().
+	 * Callback to perform any necessary cleanup of the underlying cache implementation during SessionFactory.close().
 	 */
 	public void stop()
 	{

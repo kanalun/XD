@@ -19,5 +19,6 @@
 	<modules>
 		<module>xd-deploy-bootstrap</module>
 		<module>xd-deploy-core</module>
+		<module>xd-deploy-plugins</module>
 	</modules>
 </project>

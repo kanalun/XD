@@ -7,9 +7,17 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
+		<module>xd-awaits</module>
+		<module>xd-back</module>
+		<module>xd-coal</module>
 		<module>xd-commons</module>
 		<module>xd-deploy</module>
+		<module>xd-experiment</module>
+		<module>xd-ioc</module>
+		<module>xd-log</module>
 		<module>xd-mvc</module>
+		<module>xd-tools</module>
+		<module>xd-warn</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

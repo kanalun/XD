@@ -15,7 +15,7 @@ public class AnnotationUtils
 	 * 
 	 * <strong>注意:你无法直接将注解类型转换,从而试图从中获得数据,
 	 * 
-	 * 因为运行时注解使用了Proxy,直接进行类型转换会抛出ClassCastException</strong>
+	 * 因为运行时注解使用了Proxy,直接进行类型转换会抛出ClassCastException </strong>
 	 * 
 	 * @param <T>
 	 * @param name
@@ -30,7 +30,6 @@ public class AnnotationUtils
 		{
 			logger.debug("get [" + name + "]from Annotation[" + annotation + "]...");
 			return (T) annotation.getClass().getMethod(name).invoke(annotation, new Object[0]);
-
 		} catch (IllegalArgumentException e)
 		{
 			e.printStackTrace();

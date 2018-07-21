@@ -2,7 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.xindian</groupId>
 	<artifactId>xd-commons</artifactId>
 	<packaging>pom</packaging>
 	<parent>
@@ -11,7 +10,12 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<modules>
+		<module>xd-commons-beanutils</module>
+		<module>xd-commons-cache</module>
+		<module>xd-commons-conversion</module>
+		<module>xd-commons-i18n</module>
 		<module>xd-commons-promise</module>
 		<module>xd-commons-utils</module>
+		<module>xd-commons-validation</module>
 	</modules>
 </project>

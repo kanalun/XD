@@ -16,15 +16,18 @@ import java.util.Set;
  */
 public class ClassLoaderUtils
 {
-	public static Iterator<URL> getResources(String resourceName, Class<?> callingClass, boolean aggregate) throws IOException
+	public static Iterator<URL> getResources(String resourceName, Class<?> callingClass,
+			boolean aggregate) throws IOException
 	{
 		AggregateIterator<URL> iterator = new AggregateIterator<URL>();
 
-		iterator.addEnumeration(Thread.currentThread().getContextClassLoader().getResources(resourceName));
+		iterator.addEnumeration(Thread.currentThread().getContextClassLoader()
+				.getResources(resourceName));
 
 		if (!iterator.hasNext() || aggregate)
 		{
-			iterator.addEnumeration(ClassLoaderUtils.class.getClassLoader().getResources(resourceName));
+			iterator.addEnumeration(ClassLoaderUtils.class.getClassLoader().getResources(
+					resourceName));
 		}
 
 		if (!iterator.hasNext() || aggregate)
@@ -48,8 +51,7 @@ public class ClassLoaderUtils
 	/**
 	 * Load a given resource.
 	 * 
-	 * This method will try to load the resource using the following methods (in
-	 * order):
+	 * This method will try to load the resource using the following methods (in order):
 	 * <ul>
 	 * <li>From Thread.currentThread().getContextClassLoader()
 	 * <li>From ClassLoaderUtil.class.getClassLoader()
@@ -57,8 +59,7 @@ public class ClassLoaderUtils
 	 * </ul>
 	 * 
 	 * @param resourceName
-	 *            The name IllegalStateException("Unable to call ")of the
-	 *            resource to load
+	 *            The name IllegalStateException("Unable to call ")of the resource to load
 	 * @param callingClass
 	 *            The Class object of the calling object
 	 */
@@ -130,7 +131,8 @@ public class ClassLoaderUtils
 	 * @throws ClassNotFoundException
 	 *             If the class cannot be found anywhere.
 	 */
-	public static Class<?> loadClass(String className, Class<?> callingClass) throws ClassNotFoundException
+	public static Class<?> loadClass(String className, Class<?> callingClass)
+			throws ClassNotFoundException
 	{
 		try
 		{
@@ -154,8 +156,7 @@ public class ClassLoaderUtils
 	}
 
 	/**
-	 * Aggregates Enumeration instances into one iterator and filters out
-	 * duplicates.
+	 * Aggregates Enumeration instances into one iterator and filters out duplicates.
 	 * 
 	 * Always keeps one ahead of the enumerator to
 	 * 
