@@ -7,10 +7,12 @@ import com.xindian.commons.conversion.ConversionException;
 import com.xindian.commons.conversion.Converter;
 
 @Deprecated
+@SuppressWarnings("rawtypes")
 public class SQLDateConverter implements Converter
 {
 	@Override
-	public Object convert(Map<String, Object> context, Class targetType, Object value) throws ConversionException
+	public Object convert(Map<String, Object> context, Class targetType, Object value)
+			throws ConversionException
 	{
 		if (targetType.equals(Date.class))
 		{

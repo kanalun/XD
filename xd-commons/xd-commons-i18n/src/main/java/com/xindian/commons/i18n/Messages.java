@@ -19,7 +19,7 @@ import java.lang.annotation.Target;
  * 
  * 额外message应该只返回String类型
  * 
- * 只存在语意上的差别,
+ * 只存在语意上的差别
  * 
  * @author Elva
  * @date 2011-2-4
@@ -79,9 +79,19 @@ public interface Messages extends Constants
 	{
 		String locale() default "";
 
-		String fomart() default "";// YYYY-MM-dd
+		/**
+		 * YYYY-MM-dd
+		 * 
+		 * @return
+		 */
+		String fomart() default "";
 
-		Class<?> fomarter() default Object.class;// 选择合适的格式化工具,对于Date/等常规按照类型进行格式化
+		/**
+		 * 选择合适的格式化工具,对于Date/等常规按照类型进行格式化
+		 * 
+		 * @return
+		 */
+		Class<?> fomarter() default Object.class;
 	}
 
 	@Retention(RetentionPolicy.RUNTIME)
@@ -97,5 +107,6 @@ public interface Messages extends Constants
 	@Documented
 	public @interface EscapeXml
 	{
+
 	}
 }

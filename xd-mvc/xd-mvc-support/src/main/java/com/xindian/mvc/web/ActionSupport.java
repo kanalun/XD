@@ -20,9 +20,10 @@ import com.xindian.mvc.annotation.Forbidden;
  * @date 2011-2-7
  * @version 1.0
  */
-@SuppressWarnings("serial")
-public class ActionSupport implements TextProvider, LocaleProvider, Serializable, MVCAction
+public class ActionSupport implements TextProvider, LocaleProvider, MVCAction
 {
+	private static final long serialVersionUID = 1L;
+
 	private static Logger logger = LoggerFactory.getLogger(ActionSupport.class);
 
 	private Errors errors;
@@ -72,16 +73,8 @@ public class ActionSupport implements TextProvider, LocaleProvider, Serializable
 	}
 
 	@Override
-	public Enumeration<Locale> getLocales()
+	public Locale getLocale()
 	{
 		return null;
-		// return HttpLocaleProviderSupport.getLocale(request, servletContext,
-		// pageContext, defaultLocale);
-	}
-
-	@Override
-	public void addLocale(int index, Locale locale)
-	{
-
 	}
 }

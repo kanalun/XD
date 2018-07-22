@@ -9,7 +9,7 @@ import java.util.Map;
 
 import javassist.NotFoundException;
 
-import com.xindian.beanutils.Bean5;
+import com.xindian.commons.beanutils.Bean5;
 import com.xindian.commons.utils.MethodUtils;
 import com.xindian.commons.utils.MethodUtils.MissingLVException;
 import com.xindian.mvc.annotation.After;
@@ -122,10 +122,12 @@ public class MethodMeta // implements IMethodMeta
 			After after = method.getAnnotation(After.class);
 			this.after = after.value();
 		}
-		boolean isAnnotationPresent = method.isAnnotationPresent(com.xindian.mvc.annotation.Method.class);
+		boolean isAnnotationPresent = method
+				.isAnnotationPresent(com.xindian.mvc.annotation.Method.class);
 		if (isAnnotationPresent)
 		{
-			com.xindian.mvc.annotation.Method methodAnnotation = method.getAnnotation(com.xindian.mvc.annotation.Method.class);
+			com.xindian.mvc.annotation.Method methodAnnotation = method
+					.getAnnotation(com.xindian.mvc.annotation.Method.class);
 			methodName = methodAnnotation.name();
 			type = methodAnnotation.type();
 		}
@@ -160,7 +162,8 @@ public class MethodMeta // implements IMethodMeta
 		Class<?>[] methodParameters = method.getParameterTypes();
 		try
 		{
-			String[] pNames = MethodUtils.getMethodParamNames(actionMeta.getActionClass(), method.getName(), methodParameters);
+			String[] pNames = MethodUtils.getMethodParamNames(actionMeta.getActionClass(),
+					method.getName(), methodParameters);
 			parameterMetas = new ParameterMeta[pNames.length];
 			for (int i = 0; i < pNames.length; i++)
 			{
@@ -263,7 +266,8 @@ public class MethodMeta // implements IMethodMeta
 		return null;
 	}
 
-	public void invokeBefores() throws VoteException, InstantiationException, IllegalAccessException
+	public void invokeBefores() throws VoteException, InstantiationException,
+			IllegalAccessException
 	{
 		if (before != null)
 		{

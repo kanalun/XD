@@ -15,7 +15,10 @@
 		<module>xd-ioc</module>
 		<module>xd-log</module>
 		<module>xd-mvc</module>
+		<!-- 
 		<module>xd-tools</module>
+		<module>xd-commons</module>
+		 -->
 		<module>xd-warn</module>
 	</modules>
 	<properties>

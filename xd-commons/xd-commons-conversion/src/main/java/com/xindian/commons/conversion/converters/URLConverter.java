@@ -13,10 +13,13 @@ import com.xindian.commons.conversion.ConversionException;
  * @date 2011-2-11
  * @version 1.0
  */
+
+@SuppressWarnings("rawtypes")
 public class URLConverter extends AbstractConverter
 {
 	@Override
-	public Object convert(Map<String, Object> context, Class targetType, Object sourceValue) throws ConversionException
+	public Object convert(Map<String, Object> context, Class targetType,
+			Object sourceValue) throws ConversionException
 	{
 		try
 		{

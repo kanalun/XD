@@ -20,6 +20,7 @@ import com.xindian.commons.conversion.ConverterFactory;
  * @date 2011-2-10
  * @version 1.0
  */
+@SuppressWarnings("rawtypes")
 public abstract class AbstractConverter implements Converter
 {
 	private static Logger logger = LoggerFactory.getLogger(AbstractConverter.class);
@@ -40,15 +41,15 @@ public abstract class AbstractConverter implements Converter
 	}
 
 	@Override
-	public Object convert(Map<String, Object> context, Class targetType, Object sourceValue)
-			throws ConversionException
+	public Object convert(Map<String, Object> context, Class targetType,
+			Object sourceValue) throws ConversionException
 	{
-		throw new ConversionException("unsupport to convert type[" + sourceValue.getClass()
-				+ "]to type[" + targetType + "]");
+		throw new ConversionException("unsupport to convert type["
+				+ sourceValue.getClass() + "]to type[" + targetType + "]");
 	}
 
-	protected Object handleError(Map<String, Object> context, Class targetType, Throwable throwable)
-			throws Throwable
+	protected Object handleError(Map<String, Object> context, Class targetType,
+			Throwable throwable) throws Throwable
 	{
 		Boolean useDefault = (Boolean) context.get(CONTEXT_OPTION_USE_DEFAULT_VALUE_KEY);
 		if (useDefault != null && useDefault)
@@ -93,7 +94,8 @@ public abstract class AbstractConverter implements Converter
 	 * @param array
 	 * @return
 	 */
-	public Object array2OtherTypeArray(Map<String, Object> context, Class targetType, Object array)
+	public Object array2OtherTypeArray(Map<String, Object> context, Class targetType,
+			Object array)
 	{
 		Class sourceType = array.getClass();
 		if (sourceType.isArray())

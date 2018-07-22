@@ -4,9 +4,9 @@ import java.util.Map;
 
 import com.xindian.commons.conversion.ConversionException;
 
+@SuppressWarnings("rawtypes")
 public final class ClassConverter extends AbstractConverter
 {
-
 	protected Class getDefaultType()
 	{
 		return Class.class;
@@ -18,7 +18,8 @@ public final class ClassConverter extends AbstractConverter
 	}
 
 	@Override
-	public Object convert(Map<String, Object> context, Class targetType, Object sourceValue) throws ConversionException
+	public Object convert(Map<String, Object> context, Class targetType,
+			Object sourceValue) throws ConversionException
 	{
 		try
 		{

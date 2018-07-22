@@ -14,6 +14,8 @@ import com.xindian.commons.conversion.ConversionException;
  * @date 2011-2-10
  * @version 1.0
  */
+
+@SuppressWarnings("rawtypes")
 public class EnumConverter extends AbstractConverter
 {
 	private static Logger logger = LoggerFactory.getLogger(EnumConverter.class);
@@ -34,11 +36,13 @@ public class EnumConverter extends AbstractConverter
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public Object convert(Map<String, Object> context, Class targetType, Object sourceValue) throws ConversionException
+	public Object convert(Map<String, Object> context, Class targetType,
+			Object sourceValue) throws ConversionException
 	{
 		if (!targetType.isEnum())
 		{
-			throw new ConversionException("targetType[" + targetType + "] is not a a Enum type");//
+			throw new ConversionException("targetType[" + targetType
+					+ "] is not a a Enum type");//
 		}
 		if (sourceValue instanceof String)// String->Enum
 		{
@@ -56,6 +60,7 @@ public class EnumConverter extends AbstractConverter
 
 	public static void main(String args[])
 	{
-		System.out.println((new EnumConverter().convert(null, Gender.class, "ALL")).getClass());
+		System.out.println((new EnumConverter().convert(null, Gender.class, "ALL"))
+				.getClass());
 	}
 }

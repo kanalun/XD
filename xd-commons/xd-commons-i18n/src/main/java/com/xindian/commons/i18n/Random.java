@@ -5,8 +5,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Random
 {
+	@SuppressWarnings("rawtypes")
 	private static Map cache = new ConcurrentHashMap();
 
+	@SuppressWarnings("unchecked")
 	public static <T extends Randoms> T create(Class<T> type) // throws
 	{
 		T constants = (T) cache.get(type);

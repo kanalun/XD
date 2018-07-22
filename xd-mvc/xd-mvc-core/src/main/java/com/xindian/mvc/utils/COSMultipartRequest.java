@@ -14,12 +14,12 @@ import com.oreilly.servlet.MultipartRequest;
 /**
  * 使用COS包装HTTPRequest,以支持文件上传
  */
-@SuppressWarnings("unchecked")
 public class COSMultipartRequest extends HttpServletRequestWrapper
 {
 	private MultipartRequest multipartRequest;
 
-	public COSMultipartRequest(HttpServletRequest request, String tempPath, int maxFileSize, String encoding) throws IOException
+	public COSMultipartRequest(HttpServletRequest request, String tempPath, int maxFileSize,
+			String encoding) throws IOException
 	{
 		super(request);
 		this.multipartRequest = new MultipartRequest(request, tempPath, maxFileSize, encoding);

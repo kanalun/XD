@@ -17,6 +17,7 @@ import com.xindian.commons.utils.LocaleUtils;
  * @date 2011-2-11
  * @version 1.0
  */
+@SuppressWarnings("rawtypes")
 public class LocaleConverter extends AbstractConverter
 {
 	private static Logger logger = LoggerFactory.getLogger(LocaleConverter.class);

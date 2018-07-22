@@ -21,8 +21,7 @@ public class RandomsInvocationHandler implements InvocationHandler
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable
 	{
-		@SuppressWarnings("rawtypes")
-		Class returnType = method.getReturnType();
+		Class<?> returnType = method.getReturnType();
 		if (returnType.equals(Integer.class) || returnType.equals(Integer.TYPE))
 		{
 			if (method.isAnnotationPresent(RandomInt.class))
@@ -37,7 +36,8 @@ public class RandomsInvocationHandler implements InvocationHandler
 		{
 			if (method.isAnnotationPresent(RandomFixedLengthString.class))
 			{
-				RandomFixedLengthString randomString = method.getAnnotation(RandomFixedLengthString.class);
+				RandomFixedLengthString randomString = method
+						.getAnnotation(RandomFixedLengthString.class);
 				if (randomString.length() > 0)
 				{
 					return RandomUtils.randomString2(randomString.length());
@@ -50,7 +50,8 @@ public class RandomsInvocationHandler implements InvocationHandler
 			} else if (method.isAnnotationPresent(RandomString.class))
 			{
 				RandomString randomString = method.getAnnotation(RandomString.class);
-				return RandomUtils.randomString(randomString.minLenght(), randomString.maxLength());
+				return RandomUtils.randomString(randomString.minLenght(),
+						randomString.maxLength());
 			}
 		}
 		return null;
@@ -63,7 +64,8 @@ public class RandomsInvocationHandler implements InvocationHandler
 
 	protected static <T> T newProxyInstance(Class<T> type, InvocationHandler handler)
 	{
-		return type.cast(Proxy.newProxyInstance(handler.getClass().getClassLoader(), new Class<?>[] { type }, handler));
+		return type.cast(Proxy.newProxyInstance(handler.getClass().getClassLoader(),
+				new Class<?>[] { type }, handler));
 	}
 
 }

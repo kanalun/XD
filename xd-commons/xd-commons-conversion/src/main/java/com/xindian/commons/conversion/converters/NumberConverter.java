@@ -24,23 +24,23 @@ import com.xindian.commons.utils.TypeUtils;
  * @date 2011-2-10
  * @version 1.0
  */
+
+@SuppressWarnings("rawtypes")
 public class NumberConverter extends AbstractConverter
 {
 	private static Logger logger = LoggerFactory.getLogger(NumberConverter.class);
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public Object convert(Map<String, Object> context, final Class targetType, final Object sourceValue)
-			throws ConversionException
+	public Object convert(Map<String, Object> context, final Class targetType,
+			final Object sourceValue) throws ConversionException
 	{
 		Object value = sourceValue;
-
 		Class theTargetType = TypeUtils.primitive(targetType);// 包装基本类型
-
 		if (sourceValue instanceof String)// String -> Number
 		{
 			value = toNumber(theTargetType, (String) sourceValue);
-			logger.debug("convert String[\"" + value + "\"] to Number[" + value + "]" + value.getClass());
+			logger.debug("convert String[\"" + value + "\"] to Number[" + value + "]"
+					+ value.getClass());
 			return value;
 		}
 		if (sourceValue instanceof Number)// Number -> Number
@@ -51,8 +51,8 @@ public class NumberConverter extends AbstractConverter
 		return super.convert(context, targetType, sourceValue);//
 	}
 
-	protected Number toNumber2(Map<String, Object> context, Class targetType, String value) throws NumberFormatException,
-			ParseException
+	protected Number toNumber2(Map<String, Object> context, Class targetType, String value)
+			throws NumberFormatException, ParseException
 	{
 		NumberFormat numberFormat = null;
 
@@ -76,7 +76,8 @@ public class NumberConverter extends AbstractConverter
 	 * @throws NumberFormatException
 	 */
 	@SuppressWarnings("unchecked")
-	protected Number toNumber(Class targetType, String value) throws NumberFormatException
+	protected Number toNumber(Class targetType, String value)
+			throws NumberFormatException
 	{
 		// Byte
 		if (targetType.equals(Byte.class))
@@ -133,7 +134,8 @@ public class NumberConverter extends AbstractConverter
 		// Correct Number type already
 		if (targetType.equals(value.getClass()))
 		{
-			logger.debug("target Type[" + targetType + "]equals source type[" + value.getClass() + "], just return it!");
+			logger.debug("target Type[" + targetType + "]equals source type["
+					+ value.getClass() + "], just return it!");
 			return value;
 		}
 
@@ -143,15 +145,16 @@ public class NumberConverter extends AbstractConverter
 			long longValue = value.longValue();
 			if (longValue > Byte.MAX_VALUE)
 			{
-				throw new ConversionException(toString(value.getClass()) + " value '" + value + "' is too large for "
-						+ toString(targetType));
+				throw new ConversionException(toString(value.getClass()) + " value '"
+						+ value + "' is too large for " + toString(targetType));
 			}
 			if (longValue < Byte.MIN_VALUE)
 			{
-				throw new ConversionException(toString(value.getClass()) + " value '" + value + "' is too small "
-						+ toString(targetType));
+				throw new ConversionException(toString(value.getClass()) + " value '"
+						+ value + "' is too small " + toString(targetType));
 			}
-			logger.debug("target Type[" + targetType + "] source type[" + value.getClass() + "]");
+			logger.debug("target Type[" + targetType + "] source type["
+					+ value.getClass() + "]");
 			return new Byte(value.byteValue());
 		}
 
@@ -161,15 +164,16 @@ public class NumberConverter extends AbstractConverter
 			long longValue = value.longValue();
 			if (longValue > Short.MAX_VALUE)
 			{
-				throw new ConversionException(toString(value.getClass()) + " value '" + value + "' is too large for "
-						+ toString(targetType));
+				throw new ConversionException(toString(value.getClass()) + " value '"
+						+ value + "' is too large for " + toString(targetType));
 			}
 			if (longValue < Short.MIN_VALUE)
 			{
-				throw new ConversionException(toString(value.getClass()) + " value '" + value + "' is too small "
-						+ toString(targetType));
+				throw new ConversionException(toString(value.getClass()) + " value '"
+						+ value + "' is too small " + toString(targetType));
 			}
-			logger.debug("target Type[" + targetType + "] source type[" + value.getClass() + "]");
+			logger.debug("target Type[" + targetType + "] source type["
+					+ value.getClass() + "]");
 			return new Short(value.shortValue());
 		}
 
@@ -179,22 +183,24 @@ public class NumberConverter extends AbstractConverter
 			long longValue = value.longValue();
 			if (longValue > Integer.MAX_VALUE)
 			{
-				throw new ConversionException(toString(value.getClass()) + " value '" + value + "' is too large for "
-						+ toString(targetType));
+				throw new ConversionException(toString(value.getClass()) + " value '"
+						+ value + "' is too large for " + toString(targetType));
 			}
 			if (longValue < Integer.MIN_VALUE)
 			{
-				throw new ConversionException(toString(value.getClass()) + " value '" + value + "' is too small "
-						+ toString(targetType));
+				throw new ConversionException(toString(value.getClass()) + " value '"
+						+ value + "' is too small " + toString(targetType));
 			}
-			logger.debug("target Type[" + targetType + "] source type[" + value.getClass() + "]");
+			logger.debug("target Type[" + targetType + "] source type["
+					+ value.getClass() + "]");
 			return new Integer(value.intValue());
 		}
 
 		// Long
 		if (targetType.equals(Long.class))
 		{
-			logger.debug("target Type[" + targetType + "] source type[" + value.getClass() + "]");
+			logger.debug("target Type[" + targetType + "] source type["
+					+ value.getClass() + "]");
 			return new Long(value.longValue());
 		}
 
@@ -203,24 +209,27 @@ public class NumberConverter extends AbstractConverter
 		{
 			if (value.doubleValue() > Float.MAX_VALUE)
 			{
-				throw new ConversionException(toString(value.getClass()) + " value '" + value + "' is too large for "
-						+ toString(targetType));
+				throw new ConversionException(toString(value.getClass()) + " value '"
+						+ value + "' is too large for " + toString(targetType));
 			}
-			logger.debug("target Type[" + targetType + "] source type[" + value.getClass() + "]");
+			logger.debug("target Type[" + targetType + "] source type["
+					+ value.getClass() + "]");
 			return new Float(value.floatValue());
 		}
 
 		// Double
 		if (targetType.equals(Double.class))
 		{
-			logger.debug("target Type[" + targetType + "] source type[" + value.getClass() + "]");
+			logger.debug("target Type[" + targetType + "] source type["
+					+ value.getClass() + "]");
 			return new Double(value.doubleValue());
 		}
 
 		// BigDecimal
 		if (targetType.equals(BigDecimal.class))
 		{
-			logger.debug("target Type[" + targetType + "] source type[" + value.getClass() + "]");
+			logger.debug("target Type[" + targetType + "] source type["
+					+ value.getClass() + "]");
 			if (value instanceof Float || value instanceof Double)
 			{
 				return new BigDecimal(value.toString());
@@ -236,7 +245,8 @@ public class NumberConverter extends AbstractConverter
 		// BigInteger
 		if (targetType.equals(BigInteger.class))
 		{
-			logger.debug("target Type[" + targetType + "] source type[" + value.getClass() + "]");
+			logger.debug("target Type[" + targetType + "] source type["
+					+ value.getClass() + "]");
 			if (value instanceof BigDecimal)
 			{
 				return ((BigDecimal) value).toBigInteger();
@@ -246,7 +256,8 @@ public class NumberConverter extends AbstractConverter
 			}
 		}
 
-		String msg = toString(getClass()) + " cannot handle conversion to '" + toString(targetType) + "'";
+		String msg = toString(getClass()) + " cannot handle conversion to '"
+				+ toString(targetType) + "'";
 		if (logger.isWarnEnabled())
 		{
 			logger.warn("    " + msg);

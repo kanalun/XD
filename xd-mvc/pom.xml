@@ -6,11 +6,6 @@
 	<artifactId>xd-mvc</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<parent>
-		<groupId>com.xindian</groupId>
-		<artifactId>XD</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-	</parent>
 	<modules>
 		<module>xd-mvc-core</module>
 		<module>xd-mvc-i18n</module>

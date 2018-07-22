@@ -23,9 +23,11 @@ import org.slf4j.LoggerFactory;
  * @date 2011-2-4
  * @version 1.0
  */
+@SuppressWarnings("rawtypes")
 public class DefaultResourceProvider implements ResourceProvider
 {
-	private static final Logger logger = LoggerFactory.getLogger(DefaultResourceProvider.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(DefaultResourceProvider.class);
 
 	public static DefaultResourceProvider INSTANCE = new DefaultResourceProvider();
 
@@ -42,15 +44,13 @@ public class DefaultResourceProvider implements ResourceProvider
 	public String findText(String textKey, Locale locale)
 	{
 		logger.debug("findText:[" + textKey + "]	Locale:[" + locale + "]");
-		List<String> bundleNames = defaultResourceBundleNames; // it isn't
-																// sync'd, but
-																// this is so
-																// rare, let's
-																// do it anyway
+		// it isn't sync'd, but this is so rare, let's do it anyway
+		List<String> bundleNames = defaultResourceBundleNames;
 		for (Iterator<String> iterator = bundleNames.iterator(); iterator.hasNext();)
 		{
 			String bundleName = iterator.next();
-			logger.debug("	findText:[" + textKey + "]	Locale:[" + locale + "] try:" + bundleName);
+			logger.debug("	findText:[" + textKey + "]	Locale:[" + locale + "] try:"
+					+ bundleName);
 			ResourceBundle bundle = findResourceBundle(bundleName, locale);
 			if (bundle != null)
 			{
@@ -109,15 +109,14 @@ public class DefaultResourceProvider implements ResourceProvider
 		clearDefaultResourceBundles();
 	}
 
-	/* --------------------------------------------------------------- */
-
 	protected void clearDefaultResourceBundles()
 	{
 		if (defaultResourceBundleNames != null)
 		{
 			defaultResourceBundleNames.clear();
 		}
-		defaultResourceBundleNames = Collections.synchronizedList(new ArrayList<String>());
+		defaultResourceBundleNames = Collections
+				.synchronizedList(new ArrayList<String>());
 	}
 
 	protected void addDefaultResourceBundle(String resourceBundleName)
@@ -127,8 +126,8 @@ public class DefaultResourceProvider implements ResourceProvider
 		defaultResourceBundleNames.add(0, resourceBundleName);
 		if (logger.isDebugEnabled())
 		{
-			logger.debug("Added default resource bundle '" + resourceBundleName + "' to default resource bundles = "
-					+ defaultResourceBundleNames);
+			logger.debug("Added default resource bundle '" + resourceBundleName
+					+ "' to default resource bundles = " + defaultResourceBundleNames);
 		}
 	}
 
@@ -145,7 +144,8 @@ public class DefaultResourceProvider implements ResourceProvider
 		{
 			if (!misses.containsKey(key))
 			{
-				return ResourceBundle.getBundle(bundleName, locale, Thread.currentThread().getContextClassLoader());
+				return ResourceBundle.getBundle(bundleName, locale, Thread
+						.currentThread().getContextClassLoader());
 			}
 		} catch (MissingResourceException ex)
 		{
@@ -178,14 +178,13 @@ public class DefaultResourceProvider implements ResourceProvider
 	}
 
 	@SuppressWarnings("unchecked")
-	private static void clearMap(Class cl, Object obj, String name) throws NoSuchFieldException, IllegalAccessException,
-			NoSuchMethodException, InvocationTargetException
+	private static void clearMap(Class cl, Object obj, String name)
+			throws NoSuchFieldException, IllegalAccessException, NoSuchMethodException,
+			InvocationTargetException
 	{
 		Field field = cl.getDeclaredField(name);
 		field.setAccessible(true);
-
 		Object cache = field.get(obj);
-
 		synchronized (cache)
 		{
 			Class ccl = cache.getClass();
@@ -195,7 +194,6 @@ public class DefaultResourceProvider implements ResourceProvider
 
 	}
 
-	@SuppressWarnings("unchecked")
 	private static void clearTomcatCache()
 	{
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();
@@ -210,7 +208,8 @@ public class DefaultResourceProvider implements ResourceProvider
 			{
 				if (logger.isDebugEnabled())
 				{
-					logger.debug("class loader " + cl.getName() + " is not tomcat loader.");
+					logger.debug("class loader " + cl.getName()
+							+ " is not tomcat loader.");
 				}
 			}
 		} catch (Exception e)

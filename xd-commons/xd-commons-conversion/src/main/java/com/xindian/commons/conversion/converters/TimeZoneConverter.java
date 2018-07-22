@@ -21,12 +21,15 @@ import com.xindian.commons.utils.Validator;
  * @date 2011-3-4
  * @version 1.0
  */
+
+@SuppressWarnings("rawtypes")
 public class TimeZoneConverter extends AbstractConverter
 {
 	private static Logger logger = LoggerFactory.getLogger(TimeZoneConverter.class);
 
 	@Override
-	public Object convert(Map<String, Object> context, Class targetType, Object sourceValue) throws ConversionException
+	public Object convert(Map<String, Object> context, Class targetType,
+			Object sourceValue) throws ConversionException
 	{
 		if (sourceValue == null)// 空值返回null TODO 使用context的默认值来处理?
 		{
@@ -63,7 +66,8 @@ public class TimeZoneConverter extends AbstractConverter
 			return null;
 		} else
 		{
-			TimeZone timeZone = new SimpleTimeZone(timeZoneOffset * 60 * 60 * 1000, ids[0]);
+			TimeZone timeZone = new SimpleTimeZone(timeZoneOffset * 60 * 60 * 1000,
+					ids[0]);
 			return timeZone;
 		}
 	}
@@ -72,8 +76,7 @@ public class TimeZoneConverter extends AbstractConverter
 	 * 解析字符串获得TimeZone
 	 * 
 	 * @param timeZoneId
-	 * @return 如果给定字符串可以作为timeZone的ID;如果timeZoneId
-	 *         为空(""/null)返回null,如果给定的字符串无法解析为Timezone抛出异常
+	 * @return 如果给定字符串可以作为timeZone的ID;如果timeZoneId 为空(""/null)返回null,如果给定的字符串无法解析为Timezone抛出异常
 	 */
 	public static TimeZone getTimeZone(String timeZoneId) throws ConversionException
 	{
@@ -88,7 +91,8 @@ public class TimeZoneConverter extends AbstractConverter
 			TimeZone timeZone = TimeZone.getTimeZone(timeZoneId);
 			if (timeZone.getID().equals("GMT") && !timeZoneId.equals("GMT"))
 			{
-				throw new ConversionException("timeZoneId [" + timeZoneId + "] can not parse to an available TimeZone");
+				throw new ConversionException("timeZoneId [" + timeZoneId
+						+ "] can not parse to an available TimeZone");
 			} else
 			{
 				return timeZone;
@@ -145,15 +149,15 @@ public class TimeZoneConverter extends AbstractConverter
 		{
 			Date d = sdf.parse("2011-03-04  08:53:33");
 			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
-			logger.debug("TIME:" + sdf2.format(d) + " TIMEZONE:" + sdf2.getTimeZone().getID());
+			logger.debug("TIME:" + sdf2.format(d) + " TIMEZONE:"
+					+ sdf2.getTimeZone().getID());
 
 		} catch (ParseException e)
 		{
 			e.printStackTrace();
 		}
 		/*
-		 * for (String s : TimeZone.getAvailableIDs()) {
-		 * logger.debug("TIMEZONE:" + s); }
+		 * for (String s : TimeZone.getAvailableIDs()) { logger.debug("TIMEZONE:" + s); }
 		 */
 		// logger.debug("TIMEZONE:" + TimeZone.getTimeZone("44").getID());
 		// printSysProperties();

@@ -11,20 +11,18 @@ import com.xindian.commons.conversion.ConversionException;
  * @date 2011-2-11
  * @version 1.0
  */
+@SuppressWarnings("rawtypes")
 public class BooleanConverter extends AbstractConverter
 {
-	/**
-	 * The set of strings that are known to map to Boolean.TRUE.
-	 */
+	/** The set of strings that are known to map to Boolean.TRUE. */
 	private static String[] trueStrings = { "true", "yes", "y", "on", "1" };
 
-	/**
-	 * The set of strings that are known to map to Boolean.FALSE.
-	 */
+	/** The set of strings that are known to map to Boolean.FALSE. */
 	private static String[] falseStrings = { "false", "no", "n", "off", "0" };
 
 	@Override
-	public Object convert(Map<String, Object> context, Class targetType, Object sourceValue) throws ConversionException
+	public Object convert(Map<String, Object> context, Class targetType,
+			Object sourceValue) throws ConversionException
 	{
 		String stringValue = sourceValue.toString().toLowerCase();
 		for (int i = 0; i < trueStrings.length; ++i)
@@ -41,7 +39,8 @@ public class BooleanConverter extends AbstractConverter
 				return Boolean.FALSE;
 			}
 		}
-		throw new ConversionException("Cna't convert value[" + sourceValue + "]to a Boolean");
+		throw new ConversionException("Cna't convert value[" + sourceValue
+				+ "]to a Boolean");
 		// return super.convert(context, targetType, sourceValue);
 	}
 }

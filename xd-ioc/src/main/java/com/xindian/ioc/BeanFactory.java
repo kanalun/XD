@@ -30,10 +30,10 @@ public class BeanFactory implements Singleton, ThreadSafe
 	private static BeanFactory singleton = new BeanFactory();
 
 	/**
-	 * FIXME
-	 * 缓存单例对象,使用弱键引用MAP可以防止内存溢出(GC会回收MAP中不再使用的单例对象,防止这些单例对象在应用的生命周期中一直的存在?)
+	 * FIXME 缓存单例对象,使用弱键引用MAP可以防止内存溢出(GC会回收MAP中不再使用的单例对象,防止这些单例对象在应用的生命周期中一直的存在?)
 	 */
-	private Map<Class<?>, Object> singletons = Collections.synchronizedMap(new WeakHashMap<Class<?>, Object>());
+	private Map<Class<?>, Object> singletons = Collections
+			.synchronizedMap(new WeakHashMap<Class<?>, Object>());
 
 	// new ConcurrentHashMap<Class<?>,Object>();
 
@@ -188,7 +188,8 @@ public class BeanFactory implements Singleton, ThreadSafe
 						{
 							if (autowired.required())
 							{
-								throw new IOCException("[" + type + "]中的属性[" + field.getName() + "]无法被注入", e);
+								throw new IOCException("[" + type + "]中的属性[" + field.getName()
+										+ "]无法被注入", e);
 							}
 						}
 					}

@@ -26,28 +26,39 @@ import com.xindian.commons.conversion.ConverterFactory;
  * @date 2011-2-11
  * @version 1.0
  */
+@SuppressWarnings("rawtypes")
 public class ArrayConverter extends AbstractConverter
 {
 	private static Logger logger = LoggerFactory.getLogger(ArrayConverter.class);
 
 	@Override
-	public Object convert(Map<String, Object> context, Class targetType, Object sourceValue) throws ConversionException
+	public Object convert(Map<String, Object> context, Class targetType,
+			Object sourceValue) throws ConversionException
 	{
-		if (targetType.isArray())// target type is a Array type
+		// target type is a Array type
+		if (targetType.isArray())
 		{
-			if (sourceValue instanceof String)// 字符串->目标类型数组
+			// 字符串->目标类型数组
+			if (sourceValue instanceof String)
 			{
 				logger.debug("字符串->目标类型数组");
-				Object strArray = string2StringArray(context, (String) sourceValue);// 字符串->字符串数组
-				return array2OtherTypeArray(context, targetType, strArray);// 字符串数组->目标类型
+				// 字符串->字符串数组
+				Object strArray = string2StringArray(context, (String) sourceValue);
+				// 字符串数组->目标类型
+				return array2OtherTypeArray(context, targetType, strArray);
 			}
-			if (sourceValue instanceof Collection<?>)// 集合->目标类型的数组
+			// 集合->目标类型的数组
+			if (sourceValue instanceof Collection<?>)
 			{
 				logger.debug("集合->目标类型的数组");
-				Object strArray = collection2Array(context, targetType, (Collection) sourceValue);// 集合->数组
-				return array2OtherTypeArray(context, targetType, strArray);// 数组->数组
+				// 集合->数组
+				Object strArray = collection2Array(context, targetType,
+						(Collection) sourceValue);
+				// 数组->数组
+				return array2OtherTypeArray(context, targetType, strArray);
 			}
-			if (sourceValue.getClass().isArray())// 数组->目标类型的数组(元素类型可能不同)
+			// 数组->目标类型的数组(元素类型可能不同)
+			if (sourceValue.getClass().isArray())
 			{
 				logger.debug("数组->数组(元素类型不同)");
 				return array2OtherTypeArray(context, targetType, sourceValue);
@@ -57,9 +68,11 @@ public class ArrayConverter extends AbstractConverter
 				logger.debug("类型->类型数组");
 				Object v = Array.newInstance(targetType.getComponentType(), 1);
 				Object o = null;
-				if (targetType.getComponentType() != sourceValue.getClass())// 目标数组元素类型!=现在的类型,需要进行类型转换
+				// 目标数组元素类型!=现在的类型,需要进行类型转换
+				if (targetType.getComponentType() != sourceValue.getClass())
 				{
-					o = ConverterFactory.convert(context, targetType.getComponentType(), sourceValue);
+					o = ConverterFactory.convert(context, targetType.getComponentType(),
+							sourceValue);
 				} else
 				{
 					o = sourceValue;
@@ -67,8 +80,9 @@ public class ArrayConverter extends AbstractConverter
 				Array.set(v, 0, o);// put to array
 				return v;
 			}
-		} else if (sourceValue.getClass().isArray())// target type is a not
-													// Array type 数组->类型
+		}
+		// target type is a not Array type 数组->类型
+		else if (sourceValue.getClass().isArray())
 		{
 			logger.debug("数组->类型");
 			return array2Type(context, targetType, sourceValue);
@@ -84,6 +98,7 @@ public class ArrayConverter extends AbstractConverter
 	 * @param value
 	 * @return
 	 */
+	@Override
 	protected Object string2StringArray(Map<String, Object> context, String value)
 	{
 		String delimiter = (String) context.get(CONTEXT_DELIMITER_KEY);
@@ -117,7 +132,8 @@ public class ArrayConverter extends AbstractConverter
 	 * @param collection
 	 * @return
 	 */
-	public Object collection2Array(Map<String, Object> context, Class targetType, Collection collection)
+	public Object collection2Array(Map<String, Object> context, Class targetType,
+			Collection collection)
 	{
 		return collection.toArray();
 	}
@@ -130,8 +146,8 @@ public class ArrayConverter extends AbstractConverter
 	 * @param array
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
-	protected Object array2Type(Map<String, Object> context, Class targetType, Object array)
+	protected Object array2Type(Map<String, Object> context, Class targetType,
+			Object array)
 	{
 		Class<?> sourceArrayType = array.getClass();
 		if (!sourceArrayType.isArray())
@@ -164,8 +180,8 @@ public class ArrayConverter extends AbstractConverter
 	 * @param array
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
-	public Object array2OtherTypeArray(Map<String, Object> context, Class targetType, Object array)
+	public Object array2OtherTypeArray(Map<String, Object> context, Class targetType,
+			Object array)
 	{
 		Class sourceType = array.getClass();
 		if (sourceType.isArray())
@@ -185,7 +201,8 @@ public class ArrayConverter extends AbstractConverter
 				{
 					// convert element to targetElementType
 					// TODO 优化一下:相同元素使用相同的类型转换器
-					Object o = ConverterFactory.convert(context, targetElementType, Array.get(array, i));
+					Object o = ConverterFactory.convert(context, targetElementType,
+							Array.get(array, i));
 					Array.set(returnArray, i, o);// put to array
 				} catch (ConversionException e)
 				{

@@ -26,6 +26,8 @@ import com.xindian.commons.conversion.ConverterFactory;
  * @date 2011-2-10
  * @version 1.0
  */
+
+@SuppressWarnings("rawtypes")
 public class StringConverter extends AbstractConverter
 {
 	private static Logger logger = LoggerFactory.getLogger(StringConverter.class);
@@ -37,11 +39,13 @@ public class StringConverter extends AbstractConverter
 	public static String NULL_VALUE = "null";
 
 	@Override
-	public Object convert(Map<String, Object> context, Class targetType, Object value) throws ConversionException
+	public Object convert(Map<String, Object> context, Class targetType, Object value)
+			throws ConversionException
 	{
 		if (value == null)
 		{
-			throw new ConversionException(context, String.class, value, "value can not be null");
+			throw new ConversionException(context, String.class, value,
+					"value can not be null");
 		}
 		if (value instanceof String)
 		{
@@ -117,7 +121,8 @@ public class StringConverter extends AbstractConverter
 		return value.toString();
 	}
 
-	private String arrayToString(Map<String, Object> context, Object value) throws Throwable
+	private String arrayToString(Map<String, Object> context, Object value)
+			throws Throwable
 	{
 		int size = 0;
 		Iterator iterator = null;
@@ -137,7 +142,8 @@ public class StringConverter extends AbstractConverter
 		{
 			return "";// (String) getDefault(String.class);
 		}
-		Boolean onlyFirstToString = (Boolean) context.get(CONTEXT_ONLY_FIRST_TO_STRING_FLAG_KEY);
+		Boolean onlyFirstToString = (Boolean) context
+				.get(CONTEXT_ONLY_FIRST_TO_STRING_FLAG_KEY);
 		if (onlyFirstToString != null && onlyFirstToString)
 		{
 			size = 1;
@@ -179,8 +185,7 @@ public class StringConverter extends AbstractConverter
 		// context.put(CONTEXT_LOCALE_KEY, Locale.CHINA);
 
 		/*
-		 * logger.debug("==========" + stringConverter.convert(context,
-		 * java.sql.Date.class, new java.sql.Date(new Date().getTime())));
+		 * logger.debug("==========" + stringConverter.convert(context, java.sql.Date.class, new java.sql.Date(new Date().getTime())));
 		 */
 
 		Calendar calendar = Calendar.getInstance();

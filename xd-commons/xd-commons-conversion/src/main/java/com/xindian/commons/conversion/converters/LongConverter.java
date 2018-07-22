@@ -16,16 +16,19 @@ import com.xindian.commons.conversion.Converter;
  * @version 1.0
  */
 @Deprecated
+@SuppressWarnings("rawtypes")
 public class LongConverter implements Converter
 {
 	private static Logger logger = LoggerFactory.getLogger(LongConverter.class);
 
 	@Override
-	public Object convert(Map<String, Object> context, Class targetType, Object sourceValue) throws ConversionException
+	public Object convert(Map<String, Object> context, Class targetType,
+			Object sourceValue) throws ConversionException
 	{
 		if (sourceValue instanceof Long)
 		{
-			logger.debug("SourceValue[" + sourceValue + "] is Long/long type, no need to convert");
+			logger.debug("SourceValue[" + sourceValue
+					+ "] is Long/long type, no need to convert");
 			return sourceValue;
 		}
 		if (sourceValue instanceof String)

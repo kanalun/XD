@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,10 +66,11 @@ import com.xindian.commons.utils.TypeUtils;
  */
 public class ConstantsInvocationHandler<T extends Constants> implements InvocationHandler
 {
-	private static Logger logger = LoggerFactory.getLogger(ConstantsInvocationHandler.class);
+	private static Logger logger = LoggerFactory
+			.getLogger(ConstantsInvocationHandler.class);
 
-	private static final Map<String, Object> EMPTY_CONTEXT = /*new ReadOnlyHashMap <String, Object>();*/
-			Collections.unmodifiableMap(new HashMap<String, Object>(0));
+	private static final Map<String, Object> EMPTY_CONTEXT = /* new ReadOnlyHashMap <String, Object>(); */
+	Collections.unmodifiableMap(new HashMap<String, Object>(0));
 
 	/** ResourceProvider为常量提供资源支持 */
 	private static ResourceProvider resourceProvider = DefaultResourceProvider.INSTANCE;
@@ -78,36 +78,40 @@ public class ConstantsInvocationHandler<T extends Constants> implements Invocati
 	private TextProvider textProvider = DefaultTextProvider.INSTANCE;
 
 	/** 常量缓存,默认情况下对没有参数的方法做缓存 */
-	private Map<String, Object> constantsCache = new ConcurrentHashMap<String, Object>();
+	// private Map<String, Object> constantsCache = new ConcurrentHashMap<String, Object>();
 
-	private LocaleProvider localeProvider;
+	// private LocaleProvider localeProvider;
 
-	public LocaleProvider getLocaleProvider()
-	{
-		return localeProvider;
-	}
+	// public LocaleProvider getLocaleProvider()
+	// {
+	// return localeProvider;
+	// }
+	//
+	// public void setLocaleProvider(LocaleProvider localeProvider)
+	// {
+	// this.localeProvider = localeProvider;
+	// }
 
-	public void setLocaleProvider(LocaleProvider localeProvider)
-	{
-		this.localeProvider = localeProvider;
-	}
+	/** 类型 */
+	private Class<T> type;
 
-	private Class<T> type;// 类型
-
-	private boolean global = false;// 是否为全局资源/如果是true.其他组件可以通过其他访问到这个资源
-
-	private String resourceName;// 资源名称
-
-	private String defaultLocale;// 默认本地信息
-
-	private String resourceEncode;// 资源编码
+	/** 是否为全局资源/如果是true.其他组件可以通过其他访问到这个资源 */
+	private boolean global = false;
 
 	private boolean share;
+
+	/** 资源名称 */
+	private String resourceName;
+
+	/** 默认本地信息 */
+	private String defaultLocale;
+
+	/** 资源编码 */
+	private String resourceEncode;
 
 	public ConstantsInvocationHandler(Class<T> type)
 	{
 		this.type = type;
-
 		if (type.isAnnotationPresent(DefaultLocale.class))
 		{
 			DefaultLocale defaultLocale = type.getAnnotation(DefaultLocale.class);
@@ -124,17 +128,13 @@ public class ConstantsInvocationHandler<T extends Constants> implements Invocati
 			resourceName = resource.name();
 			resourceEncode = resource.encoding();
 		}
-		if (resourceName == null || resourceName.trim().length() <= 0)// if U do
-																		// not
-																		// assign
-																		// a
-																		// resourceName
+		// if U do not assign a resourceName
+		if (resourceName == null || resourceName.trim().length() <= 0)
 		{
-			resourceName = type.getName();// it will be the same as the
-											// TypeName(通常是接口的完全限定名称)
+			// it will be the same as the TypeName(通常是接口的完全限定名称)
+			resourceName = type.getName();
 		}
 		resourceProvider.addResource(resourceName);
-
 		logger.debug("Constants Type:[" + type + "] Resource Name:[" + resourceName + "]");
 	}
 
@@ -148,7 +148,7 @@ public class ConstantsInvocationHandler<T extends Constants> implements Invocati
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable
 	{
-		logger.debug(args + "_________ARGS");
+		logger.debug("__ARGS:" + args);
 		// if (args == null || args.length == 0)
 		// {
 		// String cackeKey = cacheKey(proxy, method, args);
@@ -185,28 +185,27 @@ public class ConstantsInvocationHandler<T extends Constants> implements Invocati
 			try
 			{
 				// TODO,将格式化参数加入到上下文中,做好缓存
-				value = ConverterFactory.convert(EMPTY_CONTEXT, returnType, text);// convert
-																					// text
-																					// to
-																					// method's
-																					// returnType
+				// convert text to method's returnType
+				value = ConverterFactory.convert(EMPTY_CONTEXT, returnType, text);
 				// value = ConvertUtils.convert(text, returnType);// convert
 				// text to method's returnType
 			} catch (ConversionException e)
 			{
 				e.printStackTrace();// TODO
-			} // 检查返回值是否兼容
-				// 如果不兼容
-				// TODO isCompatibleType 并没有任何作用;因为返回类型
-			if (value == null || !TypeUtils.isCompatibleType(value, returnType))// 没有值,或者值和返回类型不兼容
+			}
+			// 检查返回值是否兼容:如果不兼容
+			// TODO isCompatibleType 并没有任何作用;因为返回类型
+			// 没有值,或者值和返回类型不兼容
+			if (value == null || !TypeUtils.isCompatibleType(value, returnType))
 			{
 				value = getDefaultValue(method);
-				logger.debug("---------------没有找到合适的资源使用类定义的默认值[" + value + "]");
+				logger.debug("没有找到合适的资源使用类定义的默认值[" + value + "]");
 			}
 		}
 		if (value == null)
 		{
-			throw new ConstantsInvocationException("Can not find text key;[" + textKey + "]");
+			throw new ConstantsInvocationException("Can not find text key;[" + textKey
+					+ "]");
 		}
 		if (method.isAnnotationPresent(EscapeXml.class) && value instanceof CharSequence
 				&& returnType.equals(String.class))
@@ -226,13 +225,14 @@ public class ConstantsInvocationHandler<T extends Constants> implements Invocati
 	@SuppressWarnings("unchecked")
 	protected Object getDefaultValue(Method method)// TODO 抛出异常
 	{
+		@SuppressWarnings("rawtypes")
 		Class returnType = method.getReturnType();
 		Object value = null;
 		if (returnType.isArray())
 		{
-			Class componentType = returnType.getComponentType();// Array
-																// elementType
-
+			// Array elementType
+			@SuppressWarnings("rawtypes")
+			Class componentType = returnType.getComponentType();
 			if (componentType.equals(String.class))// String Array
 			{
 				if (method.isAnnotationPresent(DefaultStringArrayValue.class))
@@ -241,8 +241,10 @@ public class ConstantsInvocationHandler<T extends Constants> implements Invocati
 							.getAnnotation(DefaultStringArrayValue.class);
 					value = defaultValue.value();
 				}
-			} else if (componentType.equals(Integer.class) || componentType.equals(Integer.TYPE))// Int
-																									// Array
+			}
+			// Int Array
+			else if (componentType.equals(Integer.class)
+					|| componentType.equals(Integer.TYPE))
 			{
 				if (method.isAnnotationPresent(DefaultIntArrayValue.class))
 				{
@@ -250,8 +252,9 @@ public class ConstantsInvocationHandler<T extends Constants> implements Invocati
 							.getAnnotation(DefaultIntArrayValue.class);
 					value = defaultValue.value();
 				}
-			} else if (componentType.equals(Double.class) || componentType.equals(Double.TYPE))// Double
-																								// Array
+			} else if (componentType.equals(Double.class)
+					|| componentType.equals(Double.TYPE))// Double
+															// Array
 			{
 				if (method.isAnnotationPresent(DefaultDoubleArrayValue.class))
 				{
@@ -259,8 +262,9 @@ public class ConstantsInvocationHandler<T extends Constants> implements Invocati
 							.getAnnotation(DefaultDoubleArrayValue.class);
 					value = defaultValue.value();
 				}
-			} else if (componentType.equals(Long.class) || componentType.equals(Long.TYPE))// Long
-																							// Array
+			} else if (componentType.equals(Long.class)
+					|| componentType.equals(Long.TYPE))// Long
+														// Array
 			{
 				if (method.isAnnotationPresent(DefaultLongArrayValue.class))
 				{
@@ -268,8 +272,9 @@ public class ConstantsInvocationHandler<T extends Constants> implements Invocati
 							.getAnnotation(DefaultLongArrayValue.class);
 					value = defaultValue.value();
 				}
-			} else if (componentType.equals(Boolean.class) || componentType.equals(Boolean.TYPE))// Boolean
-																									// Array
+			} else if (componentType.equals(Boolean.class)
+					|| componentType.equals(Boolean.TYPE))// Boolean
+															// Array
 			{
 				if (method.isAnnotationPresent(DefaultBooleanArrayValue.class))
 				{
@@ -277,8 +282,9 @@ public class ConstantsInvocationHandler<T extends Constants> implements Invocati
 							.getAnnotation(DefaultBooleanArrayValue.class);
 					value = defaultValue.value();
 				}
-			} else if (componentType.equals(Float.class) || componentType.equals(Float.TYPE))// Float
-																								// Array
+			} else if (componentType.equals(Float.class)
+					|| componentType.equals(Float.TYPE))// Float
+														// Array
 			{
 				if (method.isAnnotationPresent(DefaultFloatArrayValue.class))
 				{
@@ -296,8 +302,9 @@ public class ConstantsInvocationHandler<T extends Constants> implements Invocati
 							.getAnnotation(DefaultCharArrayValue.class);
 					value = defaultValue.value();
 				}
-			} else if (componentType.equals(Short.class) || componentType.equals(Short.TYPE))// Short
-																								// Array
+			} else if (componentType.equals(Short.class)
+					|| componentType.equals(Short.TYPE))// Short
+														// Array
 			{
 				if (method.isAnnotationPresent(DefaultShortArrayValue.class))
 				{
@@ -305,8 +312,9 @@ public class ConstantsInvocationHandler<T extends Constants> implements Invocati
 							.getAnnotation(DefaultShortArrayValue.class);
 					value = defaultValue.value();
 				}
-			} else if (componentType.equals(Byte.class) || componentType.equals(Byte.TYPE))// Long
-																							// Array
+			} else if (componentType.equals(Byte.class)
+					|| componentType.equals(Byte.TYPE))// Long
+														// Array
 			{
 				if (method.isAnnotationPresent(DefaultByteArrayValue.class))
 				{
@@ -330,8 +338,8 @@ public class ConstantsInvocationHandler<T extends Constants> implements Invocati
 					DefaultBigDecimalArrayValue defaultValue = method
 							.getAnnotation(DefaultBigDecimalArrayValue.class);
 					String[] values = defaultValue.value();
-					BigDecimal[] bigDecimals = (BigDecimal[]) Array.newInstance(BigDecimal.class,
-							values.length);
+					BigDecimal[] bigDecimals = (BigDecimal[]) Array.newInstance(
+							BigDecimal.class, values.length);
 					for (int i = 0; i < bigDecimals.length; i++)
 					{
 						bigDecimals[i] = new BigDecimal(values[i]);
@@ -362,7 +370,8 @@ public class ConstantsInvocationHandler<T extends Constants> implements Invocati
 					DefaultEnumArrayValue defaultValue = method
 							.getAnnotation(DefaultEnumArrayValue.class);
 					String[] values = defaultValue.value();
-					Object[] enums = (Object[]) Array.newInstance(componentType, values.length);
+					Object[] enums = (Object[]) Array.newInstance(componentType,
+							values.length);
 					for (int i = 0; i < enums.length; i++)
 					{
 						enums[i] = Enum.valueOf(componentType, values[i]);
@@ -389,11 +398,13 @@ public class ConstantsInvocationHandler<T extends Constants> implements Invocati
 					value = defaultValue.value();
 					// }
 				}
-			} else if (returnType.equals(Integer.TYPE) || returnType.equals(Integer.class))// Integer
+			} else if (returnType.equals(Integer.TYPE)
+					|| returnType.equals(Integer.class))// Integer
 			{
 				if (method.isAnnotationPresent(DefaultIntValue.class))
 				{
-					DefaultIntValue defaultValue = method.getAnnotation(DefaultIntValue.class);
+					DefaultIntValue defaultValue = method
+							.getAnnotation(DefaultIntValue.class);
 					value = defaultValue.value();
 				}
 			} else if (returnType.equals(Double.TYPE) || returnType.equals(Double.class))// Double
@@ -408,10 +419,12 @@ public class ConstantsInvocationHandler<T extends Constants> implements Invocati
 			{
 				if (method.isAnnotationPresent(DefaultLongValue.class))
 				{
-					DefaultLongValue defaultValue = method.getAnnotation(DefaultLongValue.class);
+					DefaultLongValue defaultValue = method
+							.getAnnotation(DefaultLongValue.class);
 					value = defaultValue.value();
 				}
-			} else if (returnType.equals(Boolean.TYPE) || returnType.equals(Boolean.class))// Boolean
+			} else if (returnType.equals(Boolean.TYPE)
+					|| returnType.equals(Boolean.class))// Boolean
 			{
 				if (method.isAnnotationPresent(DefaultBooleanValue.class))
 				{
@@ -423,35 +436,41 @@ public class ConstantsInvocationHandler<T extends Constants> implements Invocati
 			{
 				if (method.isAnnotationPresent(DefaultFloatValue.class))
 				{
-					DefaultFloatValue defaultValue = method.getAnnotation(DefaultFloatValue.class);
+					DefaultFloatValue defaultValue = method
+							.getAnnotation(DefaultFloatValue.class);
 					value = defaultValue.value();
 				}
 			} else if (returnType.equals(Short.TYPE) || returnType.equals(Short.class))// Short
 			{
 				if (method.isAnnotationPresent(DefaultShortValue.class))
 				{
-					DefaultShortValue defaultValue = method.getAnnotation(DefaultShortValue.class);
+					DefaultShortValue defaultValue = method
+							.getAnnotation(DefaultShortValue.class);
 					value = defaultValue.value();
 				}
 			} else if (returnType.equals(Byte.TYPE) || returnType.equals(Byte.class))// byte
 			{
 				if (method.isAnnotationPresent(DefaultByteValue.class))
 				{
-					DefaultByteValue defaultValue = method.getAnnotation(DefaultByteValue.class);
+					DefaultByteValue defaultValue = method
+							.getAnnotation(DefaultByteValue.class);
 					value = defaultValue.value();
 				}
-			} else if (returnType.equals(Character.TYPE) || returnType.equals(Character.class))// char
+			} else if (returnType.equals(Character.TYPE)
+					|| returnType.equals(Character.class))// char
 			{
 				if (method.isAnnotationPresent(DefaultCharValue.class))
 				{
-					DefaultCharValue defaultValue = method.getAnnotation(DefaultCharValue.class);
+					DefaultCharValue defaultValue = method
+							.getAnnotation(DefaultCharValue.class);
 					value = defaultValue.value();
 				}
 			} else if (returnType.equals(Class.class))// Class
 			{
 				if (method.isAnnotationPresent(DefaultClassValue.class))
 				{
-					DefaultClassValue defaultValue = method.getAnnotation(DefaultClassValue.class);
+					DefaultClassValue defaultValue = method
+							.getAnnotation(DefaultClassValue.class);
 					value = defaultValue.value();
 				}
 			} else if (returnType.equals(BigDecimal.class))// BigDecimal
@@ -508,7 +527,8 @@ public class ConstantsInvocationHandler<T extends Constants> implements Invocati
 			{
 				if (method.isAnnotationPresent(DefaultEnumValue.class))
 				{
-					DefaultEnumValue defaultValue = method.getAnnotation(DefaultEnumValue.class);
+					DefaultEnumValue defaultValue = method
+							.getAnnotation(DefaultEnumValue.class);
 					Enum e = Enum.valueOf(returnType, defaultValue.value());
 					return e;
 				}
@@ -578,5 +598,4 @@ public class ConstantsInvocationHandler<T extends Constants> implements Invocati
 		return type.cast(Proxy.newProxyInstance(handler.getClass().getClassLoader(),
 				new Class<?>[] { type }, handler));
 	}
-
 }

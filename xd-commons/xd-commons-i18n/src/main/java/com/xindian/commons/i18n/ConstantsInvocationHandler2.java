@@ -64,10 +64,14 @@ import com.xindian.commons.utils.TypeUtils;
  * @version 1.0
  * @param <T>
  */
-@SuppressWarnings("unchecked")
-public final class ConstantsInvocationHandler2<T extends Constants> implements InvocationHandler, LocaleProvider
+@Deprecated
+public final class ConstantsInvocationHandler2<T extends Constants> implements
+		InvocationHandler, LocaleProvider
 {
-	private static Logger logger = LoggerFactory.getLogger(ConstantsInvocationHandler2.class);
+	private static final long serialVersionUID = 1L;
+
+	private static Logger logger = LoggerFactory
+			.getLogger(ConstantsInvocationHandler2.class);
 
 	/** EMPTY TYPE CONVERTION CONTEXT */
 	private static final Map<String, Object> EMPTY_CONTEXT = Collections.EMPTY_MAP;
@@ -108,7 +112,8 @@ public final class ConstantsInvocationHandler2<T extends Constants> implements I
 		if (type.isAnnotationPresent(DefaultLocale.class))
 		{
 			DefaultLocale defaultLocale = type.getAnnotation(DefaultLocale.class);
-			this.defaultLocale = LocaleUtils.localeFromString(defaultLocale.value(), null);
+			this.defaultLocale = LocaleUtils
+					.localeFromString(defaultLocale.value(), null);
 		}
 		if (type.isAnnotationPresent(Gloabal.class))
 		{
@@ -125,9 +130,7 @@ public final class ConstantsInvocationHandler2<T extends Constants> implements I
 		{
 			resourceName = type.getName();
 		}
-
 		// resourceProvider.addResource(resourceName);
-
 		logger.debug("Constants Resource Name:[" + resourceName + "]");
 	}
 
@@ -156,7 +159,8 @@ public final class ConstantsInvocationHandler2<T extends Constants> implements I
 		// }
 		Class<?> returnType = method.getReturnType();
 
-		logger.debug("Constants Method:[" + method + "] Return Type:[" + returnType + "]" + "args:[" + args + "]");
+		logger.debug("Constants Method:[" + method + "] Return Type:[" + returnType + "]"
+				+ "args:[" + args + "]");
 
 		String textKey = null;
 
@@ -180,7 +184,8 @@ public final class ConstantsInvocationHandler2<T extends Constants> implements I
 		{
 			if (hasResource)
 			{
-				resourceBundle = ResourceBundle.getBundle(resourceName, locale, Thread.currentThread().getContextClassLoader());
+				resourceBundle = ResourceBundle.getBundle(resourceName, locale, Thread
+						.currentThread().getContextClassLoader());
 				text = resourceBundle.getString(textKey);
 				locale = resourceBundle.getLocale();
 
@@ -221,9 +226,11 @@ public final class ConstantsInvocationHandler2<T extends Constants> implements I
 		}
 		if (value == null)
 		{
-			throw new ConstantsInvocationException("Can not find text key;[" + textKey + "]");
+			throw new ConstantsInvocationException("Can not find text key;[" + textKey
+					+ "]");
 		}
-		if (method.isAnnotationPresent(EscapeXml.class) && value instanceof CharSequence && returnType.equals(String.class))
+		if (method.isAnnotationPresent(EscapeXml.class) && value instanceof CharSequence
+				&& returnType.equals(String.class))
 		{
 			logger.debug("String EscapeXml");
 			value = new SafeHtml((CharSequence) value).toString();
@@ -250,78 +257,96 @@ public final class ConstantsInvocationHandler2<T extends Constants> implements I
 			{
 				if (method.isAnnotationPresent(DefaultStringArrayValue.class))
 				{
-					DefaultStringArrayValue defaultValue = method.getAnnotation(DefaultStringArrayValue.class);
+					DefaultStringArrayValue defaultValue = method
+							.getAnnotation(DefaultStringArrayValue.class);
 					value = defaultValue.value();
 				}
-			} else if (componentType.equals(Integer.class) || componentType.equals(Integer.TYPE))// Int
-																									// Array
+			} else if (componentType.equals(Integer.class)
+					|| componentType.equals(Integer.TYPE))// Int
+															// Array
 			{
 				if (method.isAnnotationPresent(DefaultIntArrayValue.class))
 				{
-					DefaultIntArrayValue defaultValue = method.getAnnotation(DefaultIntArrayValue.class);
+					DefaultIntArrayValue defaultValue = method
+							.getAnnotation(DefaultIntArrayValue.class);
 					value = defaultValue.value();
 				}
-			} else if (componentType.equals(Double.class) || componentType.equals(Double.TYPE))// Double
-																								// Array
+			} else if (componentType.equals(Double.class)
+					|| componentType.equals(Double.TYPE))// Double
+															// Array
 			{
 				if (method.isAnnotationPresent(DefaultDoubleArrayValue.class))
 				{
-					DefaultDoubleArrayValue defaultValue = method.getAnnotation(DefaultDoubleArrayValue.class);
+					DefaultDoubleArrayValue defaultValue = method
+							.getAnnotation(DefaultDoubleArrayValue.class);
 					value = defaultValue.value();
 				}
-			} else if (componentType.equals(Long.class) || componentType.equals(Long.TYPE))// Long
-																							// Array
+			} else if (componentType.equals(Long.class)
+					|| componentType.equals(Long.TYPE))// Long
+														// Array
 			{
 				if (method.isAnnotationPresent(DefaultLongArrayValue.class))
 				{
-					DefaultLongArrayValue defaultValue = method.getAnnotation(DefaultLongArrayValue.class);
+					DefaultLongArrayValue defaultValue = method
+							.getAnnotation(DefaultLongArrayValue.class);
 					value = defaultValue.value();
 				}
-			} else if (componentType.equals(Boolean.class) || componentType.equals(Boolean.TYPE))// Boolean
-																									// Array
+			} else if (componentType.equals(Boolean.class)
+					|| componentType.equals(Boolean.TYPE))// Boolean
+															// Array
 			{
 				if (method.isAnnotationPresent(DefaultBooleanArrayValue.class))
 				{
-					DefaultBooleanArrayValue defaultValue = method.getAnnotation(DefaultBooleanArrayValue.class);
+					DefaultBooleanArrayValue defaultValue = method
+							.getAnnotation(DefaultBooleanArrayValue.class);
 					value = defaultValue.value();
 				}
-			} else if (componentType.equals(Float.class) || componentType.equals(Float.TYPE))// Float
-																								// Array
+			} else if (componentType.equals(Float.class)
+					|| componentType.equals(Float.TYPE))// Float
+														// Array
 			{
 				if (method.isAnnotationPresent(DefaultFloatArrayValue.class))
 				{
-					DefaultFloatArrayValue defaultValue = method.getAnnotation(DefaultFloatArrayValue.class);
+					DefaultFloatArrayValue defaultValue = method
+							.getAnnotation(DefaultFloatArrayValue.class);
 					value = defaultValue.value();
 				}
-			} else if (componentType.equals(Character.class) || componentType.equals(Character.TYPE))// Character
-																										// Array
+			} else if (componentType.equals(Character.class)
+					|| componentType.equals(Character.TYPE))// Character
+															// Array
 			{
 				if (method.isAnnotationPresent(DefaultCharArrayValue.class))
 				{
-					DefaultCharArrayValue defaultValue = method.getAnnotation(DefaultCharArrayValue.class);
+					DefaultCharArrayValue defaultValue = method
+							.getAnnotation(DefaultCharArrayValue.class);
 					value = defaultValue.value();
 				}
-			} else if (componentType.equals(Short.class) || componentType.equals(Short.TYPE))// Short
-																								// Array
+			} else if (componentType.equals(Short.class)
+					|| componentType.equals(Short.TYPE))// Short
+														// Array
 			{
 				if (method.isAnnotationPresent(DefaultShortArrayValue.class))
 				{
-					DefaultShortArrayValue defaultValue = method.getAnnotation(DefaultShortArrayValue.class);
+					DefaultShortArrayValue defaultValue = method
+							.getAnnotation(DefaultShortArrayValue.class);
 					value = defaultValue.value();
 				}
-			} else if (componentType.equals(Byte.class) || componentType.equals(Byte.TYPE))// Byte
-																							// Array
+			} else if (componentType.equals(Byte.class)
+					|| componentType.equals(Byte.TYPE))// Byte
+														// Array
 			{
 				if (method.isAnnotationPresent(DefaultByteArrayValue.class))
 				{
-					DefaultByteArrayValue defaultValue = method.getAnnotation(DefaultByteArrayValue.class);
+					DefaultByteArrayValue defaultValue = method
+							.getAnnotation(DefaultByteArrayValue.class);
 					value = defaultValue.value();
 				}
 			} else if (componentType.equals(Class.class))// Class Array
 			{
 				if (method.isAnnotationPresent(DefaultClassArrayValue.class))
 				{
-					DefaultClassArrayValue defaultValue = method.getAnnotation(DefaultClassArrayValue.class);
+					DefaultClassArrayValue defaultValue = method
+							.getAnnotation(DefaultClassArrayValue.class);
 					value = defaultValue.value();
 				}
 			} else if (componentType.equals(BigDecimal.class))// BigDecimal
@@ -329,9 +354,11 @@ public final class ConstantsInvocationHandler2<T extends Constants> implements I
 			{
 				if (method.isAnnotationPresent(DefaultBigDecimalArrayValue.class))
 				{
-					DefaultBigDecimalArrayValue defaultValue = method.getAnnotation(DefaultBigDecimalArrayValue.class);
+					DefaultBigDecimalArrayValue defaultValue = method
+							.getAnnotation(DefaultBigDecimalArrayValue.class);
 					String[] values = defaultValue.value();
-					BigDecimal[] bigDecimals = (BigDecimal[]) Array.newInstance(BigDecimal.class, values.length);
+					BigDecimal[] bigDecimals = (BigDecimal[]) Array.newInstance(
+							BigDecimal.class, values.length);
 					for (int i = 0; i < bigDecimals.length; i++)
 					{
 						bigDecimals[i] = new BigDecimal(values[i]);
@@ -343,7 +370,8 @@ public final class ConstantsInvocationHandler2<T extends Constants> implements I
 			{
 				if (method.isAnnotationPresent(DefaultBigIntegerArrayValue.class))
 				{
-					DefaultBigIntegerArrayValue defaultValue = method.getAnnotation(DefaultBigIntegerArrayValue.class);
+					DefaultBigIntegerArrayValue defaultValue = method
+							.getAnnotation(DefaultBigIntegerArrayValue.class);
 					String[] values = defaultValue.value();
 					BigInteger[] bigIntegers = new BigInteger[values.length];
 					// BigInteger[] vs = (BigInteger[])
@@ -358,9 +386,11 @@ public final class ConstantsInvocationHandler2<T extends Constants> implements I
 			{
 				if (method.isAnnotationPresent(DefaultEnumArrayValue.class))
 				{
-					DefaultEnumArrayValue defaultValue = method.getAnnotation(DefaultEnumArrayValue.class);
+					DefaultEnumArrayValue defaultValue = method
+							.getAnnotation(DefaultEnumArrayValue.class);
 					String[] values = defaultValue.value();
-					Object[] enums = (Object[]) Array.newInstance(componentType, values.length);
+					Object[] enums = (Object[]) Array.newInstance(componentType,
+							values.length);
 					for (int i = 0; i < enums.length; i++)
 					{
 						enums[i] = Enum.valueOf(componentType, values[i]);
@@ -374,7 +404,8 @@ public final class ConstantsInvocationHandler2<T extends Constants> implements I
 			{
 				if (method.isAnnotationPresent(DefaultStringValue.class))
 				{
-					DefaultStringValue defaultValue = method.getAnnotation(DefaultStringValue.class);
+					DefaultStringValue defaultValue = method
+							.getAnnotation(DefaultStringValue.class);
 					/**
 					 * <code>	
 					if (method.isAnnotationPresent(EscapeXml.class))
@@ -386,88 +417,103 @@ public final class ConstantsInvocationHandler2<T extends Constants> implements I
 					value = defaultValue.value();
 					// }
 				}
-			} else if (returnType.equals(Integer.TYPE) || returnType.equals(Integer.class))// Integer
+			} else if (returnType.equals(Integer.TYPE)
+					|| returnType.equals(Integer.class))// Integer
 			{
 				if (method.isAnnotationPresent(DefaultIntValue.class))
 				{
-					DefaultIntValue defaultValue = method.getAnnotation(DefaultIntValue.class);
+					DefaultIntValue defaultValue = method
+							.getAnnotation(DefaultIntValue.class);
 					value = defaultValue.value();
 				}
 			} else if (returnType.equals(Double.TYPE) || returnType.equals(Double.class))// Double
 			{
 				if (method.isAnnotationPresent(DefaultDoubleValue.class))
 				{
-					DefaultDoubleValue defaultValue = method.getAnnotation(DefaultDoubleValue.class);
+					DefaultDoubleValue defaultValue = method
+							.getAnnotation(DefaultDoubleValue.class);
 					value = defaultValue.value();
 				}
 			} else if (returnType.equals(Long.TYPE) || returnType.equals(Long.class))// Long
 			{
 				if (method.isAnnotationPresent(DefaultLongValue.class))
 				{
-					DefaultLongValue defaultValue = method.getAnnotation(DefaultLongValue.class);
+					DefaultLongValue defaultValue = method
+							.getAnnotation(DefaultLongValue.class);
 					value = defaultValue.value();
 				}
-			} else if (returnType.equals(Boolean.TYPE) || returnType.equals(Boolean.class))// Boolean
+			} else if (returnType.equals(Boolean.TYPE)
+					|| returnType.equals(Boolean.class))// Boolean
 			{
 				if (method.isAnnotationPresent(DefaultBooleanValue.class))
 				{
-					DefaultBooleanValue defaultValue = method.getAnnotation(DefaultBooleanValue.class);
+					DefaultBooleanValue defaultValue = method
+							.getAnnotation(DefaultBooleanValue.class);
 					value = defaultValue.value();
 				}
 			} else if (returnType.equals(Float.TYPE) || returnType.equals(Float.class))// float
 			{
 				if (method.isAnnotationPresent(DefaultFloatValue.class))
 				{
-					DefaultFloatValue defaultValue = method.getAnnotation(DefaultFloatValue.class);
+					DefaultFloatValue defaultValue = method
+							.getAnnotation(DefaultFloatValue.class);
 					value = defaultValue.value();
 				}
 			} else if (returnType.equals(Short.TYPE) || returnType.equals(Short.class))// Short
 			{
 				if (method.isAnnotationPresent(DefaultShortValue.class))
 				{
-					DefaultShortValue defaultValue = method.getAnnotation(DefaultShortValue.class);
+					DefaultShortValue defaultValue = method
+							.getAnnotation(DefaultShortValue.class);
 					value = defaultValue.value();
 				}
 			} else if (returnType.equals(Byte.TYPE) || returnType.equals(Byte.class))// byte
 			{
 				if (method.isAnnotationPresent(DefaultByteValue.class))
 				{
-					DefaultByteValue defaultValue = method.getAnnotation(DefaultByteValue.class);
+					DefaultByteValue defaultValue = method
+							.getAnnotation(DefaultByteValue.class);
 					value = defaultValue.value();
 				}
-			} else if (returnType.equals(Character.TYPE) || returnType.equals(Character.class))// char
+			} else if (returnType.equals(Character.TYPE)
+					|| returnType.equals(Character.class))// char
 			{
 				if (method.isAnnotationPresent(DefaultCharValue.class))
 				{
-					DefaultCharValue defaultValue = method.getAnnotation(DefaultCharValue.class);
+					DefaultCharValue defaultValue = method
+							.getAnnotation(DefaultCharValue.class);
 					value = defaultValue.value();
 				}
 			} else if (returnType.equals(Class.class))// Class
 			{
 				if (method.isAnnotationPresent(DefaultClassValue.class))
 				{
-					DefaultClassValue defaultValue = method.getAnnotation(DefaultClassValue.class);
+					DefaultClassValue defaultValue = method
+							.getAnnotation(DefaultClassValue.class);
 					value = defaultValue.value();
 				}
 			} else if (returnType.equals(BigDecimal.class))// BigDecimal
 			{
 				if (method.isAnnotationPresent(DefaultBigDecimalValue.class))
 				{
-					DefaultBigDecimalValue defaultValue = method.getAnnotation(DefaultBigDecimalValue.class);
+					DefaultBigDecimalValue defaultValue = method
+							.getAnnotation(DefaultBigDecimalValue.class);
 					value = new BigDecimal(defaultValue.value());
 				}
 			} else if (returnType.equals(BigInteger.class))// BigInteger
 			{
 				if (method.isAnnotationPresent(DefaultBigIntegerValue.class))
 				{
-					DefaultBigIntegerValue defaultValue = method.getAnnotation(DefaultBigIntegerValue.class);
+					DefaultBigIntegerValue defaultValue = method
+							.getAnnotation(DefaultBigIntegerValue.class);
 					value = new BigInteger(defaultValue.value());
 				}
 			} else if (returnType.equals(SafeHtml.class))// SafeHtml
 			{
 				if (method.isAnnotationPresent(DefaultStringValue.class))
 				{
-					DefaultStringValue defaultValue = method.getAnnotation(DefaultStringValue.class);
+					DefaultStringValue defaultValue = method
+							.getAnnotation(DefaultStringValue.class);
 					SafeHtml s = new SafeHtml(defaultValue.value());
 					return s;
 				}
@@ -475,7 +521,8 @@ public final class ConstantsInvocationHandler2<T extends Constants> implements I
 			{
 				if (method.isAnnotationPresent(DefaultStringValue.class))
 				{
-					DefaultStringValue defaultValue = method.getAnnotation(DefaultStringValue.class);
+					DefaultStringValue defaultValue = method
+							.getAnnotation(DefaultStringValue.class);
 					try
 					{
 						URL s = new URL(defaultValue.value());
@@ -490,7 +537,8 @@ public final class ConstantsInvocationHandler2<T extends Constants> implements I
 			{
 				if (method.isAnnotationPresent(DefaultEnumValue.class))
 				{
-					DefaultEnumValue defaultValue = method.getAnnotation(DefaultEnumValue.class);
+					DefaultEnumValue defaultValue = method
+							.getAnnotation(DefaultEnumValue.class);
 					Enum e = Enum.valueOf(returnType, defaultValue.value());
 					return e;
 				}
@@ -498,7 +546,8 @@ public final class ConstantsInvocationHandler2<T extends Constants> implements I
 			{
 				if (method.isAnnotationPresent(DefaultStringMapValue.class))
 				{
-					DefaultStringMapValue defaultValue = method.getAnnotation(DefaultStringMapValue.class);
+					DefaultStringMapValue defaultValue = method
+							.getAnnotation(DefaultStringMapValue.class);
 					String[] ss = defaultValue.value();
 					ReadOnlyHashMap map = new ReadOnlyHashMap();
 					for (String s : ss)
@@ -572,7 +621,8 @@ public final class ConstantsInvocationHandler2<T extends Constants> implements I
 
 	protected static <T> T newProxyInstance(Class<T> type, InvocationHandler handler)
 	{
-		return type.cast(Proxy.newProxyInstance(handler.getClass().getClassLoader(), new Class<?>[] { type }, handler));
+		return type.cast(Proxy.newProxyInstance(handler.getClass().getClassLoader(),
+				new Class<?>[] { type }, handler));
 	}
 
 }

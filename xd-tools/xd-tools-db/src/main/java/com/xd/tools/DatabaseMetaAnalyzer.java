@@ -75,7 +75,8 @@ public class DatabaseMetaAnalyzer
 	 * @return
 	 * @throws SQLException
 	 */
-	private static final ResultSet getOracleColumns(String tableName, Connection connection) throws SQLException
+	private static final ResultSet getOracleColumns(String tableName, Connection connection)
+			throws SQLException
 	{
 		PreparedStatement statement = connection.prepareStatement(ORACLE_COLUMS_SQL);
 		statement.setString(1, tableName);
@@ -83,7 +84,8 @@ public class DatabaseMetaAnalyzer
 		return resultSet;
 	}
 
-	private static final ResultSet getOracleColumnsComments(String tableName, Connection connection) throws SQLException
+	private static final ResultSet getOracleColumnsComments(String tableName, Connection connection)
+			throws SQLException
 	{
 		return null;
 	}
@@ -125,8 +127,8 @@ public class DatabaseMetaAnalyzer
 	 * @return
 	 */
 	@Deprecated
-	private static Connection getConnection(DBType dbType, String host, Integer port, String dbName, String username,
-			String password)
+	private static Connection getConnection(DBType dbType, String host, Integer port,
+			String dbName, String username, String password)
 	{
 		int defaultPort = -1;
 		String dirverClass = null;
@@ -204,7 +206,8 @@ public class DatabaseMetaAnalyzer
 		for (TableMeta tableMeta : tableMetas)
 		{
 			String tableName = tableMeta.tableName;
-			System.out.println(++i + " Table: " + tableName + " Class:" + namingStrategy.tableNameToClass(tableName));
+			System.out.println(++i + " Table: " + tableName + " Class:"
+					+ namingStrategy.tableNameToClass(tableName));
 		}
 	}
 
@@ -251,7 +254,8 @@ public class DatabaseMetaAnalyzer
 			{
 				try
 				{
-					System.out.println(m.getName() + ":" + m.invoke(dataBaseMetaData, new Object[0]));
+					System.out.println(m.getName() + ":"
+							+ m.invoke(dataBaseMetaData, new Object[0]));
 				} catch (Exception e)
 				{
 				}
@@ -282,7 +286,8 @@ public class DatabaseMetaAnalyzer
 	 * @throws IOException
 	 */
 	@SuppressWarnings("unused")
-	public static List<TableMeta> getTableMetas(final String schemaPattern, final String tableNamePattern) throws IOException
+	public static List<TableMeta> getTableMetas(final String schemaPattern,
+			final String tableNamePattern) throws IOException
 	{
 		StringBuffer logBuffer = new StringBuffer();
 
@@ -293,8 +298,8 @@ public class DatabaseMetaAnalyzer
 			String catalog = connection.getCatalog(); // catalog 其实也就是数据库名
 			DatabaseMetaData dataBaseMetaData = connection.getMetaData();
 
-			ResultSet tablesResultSet = dataBaseMetaData.getTables(catalog, schemaPattern, tableNamePattern,
-					new String[] { "TABLE" });
+			ResultSet tablesResultSet = dataBaseMetaData.getTables(catalog, schemaPattern,
+					tableNamePattern, new String[] { "TABLE" });
 			// TABLE
 			while (tablesResultSet.next())
 			{
@@ -321,7 +326,8 @@ public class DatabaseMetaAnalyzer
 					println("---COLUMNS:");
 					if (!oracle)
 					{
-						columnsResultSet = dataBaseMetaData.getColumns(catalog, schemaPattern, tableName, null);
+						columnsResultSet = dataBaseMetaData.getColumns(catalog, schemaPattern,
+								tableName, null);
 					} else
 					{
 						columnsResultSet = getOracleColumns(tableName, connection);
@@ -369,7 +375,8 @@ public class DatabaseMetaAnalyzer
 				try
 				{
 					println("---INDEX:");
-					indexSet = dataBaseMetaData.getIndexInfo(catalog, schemaPattern, tableName, false, true);
+					indexSet = dataBaseMetaData.getIndexInfo(catalog, schemaPattern, tableName,
+							false, true);
 					while (indexSet.next())
 					{
 						String COLUMN_NAME = indexSet.getString("COLUMN_NAME");
@@ -378,7 +385,8 @@ public class DatabaseMetaAnalyzer
 						short TYPE = indexSet.getShort("TYPE");
 						short ORDINAL_POSITION = indexSet.getShort("ORDINAL_POSITION");
 
-						println("   |-INDEX_NAME:[" + INDEX_NAME + "] COLUMN_NAME:[" + COLUMN_NAME + "]");
+						println("   |-INDEX_NAME:[" + INDEX_NAME + "] COLUMN_NAME:[" + COLUMN_NAME
+								+ "]");
 						for (ColumnMeta columnMeta : tableMeta.columns)
 						{
 							if (COLUMN_NAME != null && COLUMN_NAME.equals(columnMeta.columnName))
@@ -389,7 +397,8 @@ public class DatabaseMetaAnalyzer
 					}
 				} catch (Exception e)
 				{
-					println("catalog:[" + catalog + "] schemaPattern:[" + schemaPattern + "]  tableName:[" + tableName + "]");
+					println("catalog:[" + catalog + "] schemaPattern:[" + schemaPattern
+							+ "]  tableName:[" + tableName + "]");
 					e.printStackTrace();
 				} finally
 				{
@@ -404,7 +413,8 @@ public class DatabaseMetaAnalyzer
 				{
 					println("---PRIMARY_KEY:");
 					// PK
-					primaryKeyResultSet = dataBaseMetaData.getPrimaryKeys(catalog, schemaPattern, tableName);
+					primaryKeyResultSet = dataBaseMetaData.getPrimaryKeys(catalog, schemaPattern,
+							tableName);
 					while (primaryKeyResultSet.next())
 					{
 						String primaryKeyColumnName = primaryKeyResultSet.getString("COLUMN_NAME");
@@ -446,7 +456,8 @@ public class DatabaseMetaAnalyzer
 				try
 				{
 					println("---IMPORTED_KEY(外键约束):");
-					importedKeyResultSet = dataBaseMetaData.getImportedKeys(catalog, schemaPattern, tableName);
+					importedKeyResultSet = dataBaseMetaData.getImportedKeys(catalog, schemaPattern,
+							tableName);
 					// FK
 					while (importedKeyResultSet.next())
 					{
@@ -458,7 +469,8 @@ public class DatabaseMetaAnalyzer
 
 						println("   |-" + FK_NAME + ":[" /*
 														 * + FKTABLE_NAME + "."
-														 */+ FKCOLUMN_NAME + " -> " + PKTABLE_NAME + "." + PKCOLUMN_NAME + "]");
+														 */+ FKCOLUMN_NAME + " -> " + PKTABLE_NAME
+								+ "." + PKCOLUMN_NAME + "]");
 
 						// println(" ---" + primaryKeyColumnName);
 						for (ColumnMeta columnMeta : tableMeta.columns)
@@ -493,7 +505,8 @@ public class DatabaseMetaAnalyzer
 				{
 					println("---EXPORTED_KEY(被别的表引用):");
 
-					exportedKeyResultSet = dataBaseMetaData.getExportedKeys(catalog, schemaPattern, tableName);
+					exportedKeyResultSet = dataBaseMetaData.getExportedKeys(catalog, schemaPattern,
+							tableName);
 					// FK
 					while (exportedKeyResultSet.next())
 					{
@@ -503,7 +516,8 @@ public class DatabaseMetaAnalyzer
 						String FKCOLUMN_NAME = exportedKeyResultSet.getString("FKCOLUMN_NAME");
 						String FK_NAME = exportedKeyResultSet.getString("FK_NAME");
 						// println(" ---" + primaryKeyColumnName);
-						println("   |-" + FK_NAME + ":[" + PKCOLUMN_NAME + " <- " + FKTABLE_NAME + "." + FKCOLUMN_NAME + "]");
+						println("   |-" + FK_NAME + ":[" + PKCOLUMN_NAME + " <- " + FKTABLE_NAME
+								+ "." + FKCOLUMN_NAME + "]");
 
 						for (ColumnMeta columnMeta : tableMeta.columns)
 						{
@@ -533,7 +547,6 @@ public class DatabaseMetaAnalyzer
 				}
 				println("------------END OF " + tableName + "------------");
 			}
-
 		} catch (Exception e)
 		{
 			e.printStackTrace();

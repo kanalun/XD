@@ -164,7 +164,6 @@ public interface Constants extends LocalizableResource
 	 * 
 	 * No quoting (other than normal Java string quoting) is done.
 	 */
-
 	@Target(ElementType.METHOD)
 	@Retention(RetentionPolicy.RUNTIME)
 	@Documented
@@ -253,15 +252,17 @@ public interface Constants extends LocalizableResource
 	}
 
 	/**
-	 * Default string array value to be used if no translation is found (and
-	 * also used as the source for translation).
+	 * Default string array value to be used if no translation is found
+	 * 
+	 * (and also used as the source for translation).
 	 * 
 	 * No quoting (other than normal Java string quoting) is done.
 	 * 
 	 * Note that in the corresponding properties/etc file,
 	 * 
-	 * commas are used to separate elements of the array unless they are
-	 * preceded with a backslash.
+	 * commas are used to separate elements of the array unless they are preceded
+	 * 
+	 * with a backslash.
 	 */
 	@Documented
 	@Target(ElementType.METHOD)
@@ -272,16 +273,23 @@ public interface Constants extends LocalizableResource
 	}
 
 	/**
-	 * Default string map value to be used if no translation is found (and also
-	 * used as the source for translation). No quoting (other than normal Java
-	 * string quoting) is done. The strings for the map are supplied in
-	 * key/value pairs.
+	 * Default string map value to be used if no translation is found
 	 * 
-	 * Note that in the corresponding properties/etc file, new keys can be
-	 * supplied with the name of the method (or its corresponding key) listing
-	 * the set of keys for the map separated by commas (commas can be part of
-	 * the keys by preceding them with a backslash). In either case, further
-	 * entries have keys matching the key in this map.
+	 * (and also used as the source for translation).
+	 * 
+	 * No quoting (other than normal Java string quoting) is done.
+	 * 
+	 * The strings for the map are supplied in key/value pairs.
+	 * 
+	 * Note that in the corresponding properties/etc file,
+	 * 
+	 * new keys can be supplied with the name of the method (or its corresponding key)
+	 * 
+	 * listing the set of keys for the map separated by commas
+	 * 
+	 * (commas can be part of the keys by preceding them with a backslash). In either case,
+	 * 
+	 * further entries have keys matching the key in this map.
 	 * 
 	 * key:value/key,value,k2,v2
 	 */

@@ -5,11 +5,11 @@ import java.util.Map;
 import com.xindian.commons.conversion.ConversionException;
 
 /**
- * 
  * @author Elva
  * @date 2011-2-11
  * @version 1.0
  */
+@SuppressWarnings("rawtypes")
 public final class CharacterConverter extends AbstractConverter
 {
 	protected Class getDefaultType()
@@ -29,7 +29,8 @@ public final class CharacterConverter extends AbstractConverter
 	}
 
 	@Override
-	public Object convert(Map<String, Object> context, Class targetType, Object sourceValue) throws ConversionException
+	public Object convert(Map<String, Object> context, Class targetType,
+			Object sourceValue) throws ConversionException
 	{
 		return new Character(sourceValue.toString().charAt(0));
 	}

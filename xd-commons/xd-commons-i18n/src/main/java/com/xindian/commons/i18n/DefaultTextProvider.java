@@ -7,6 +7,7 @@ import java.util.List;
  * @date 2011-2-4
  * @version 1.0
  */
+@SuppressWarnings("rawtypes")
 public class DefaultTextProvider implements TextProvider
 {
 	private static final Object[] EMPTY_ARGS = new Object[0];
@@ -78,12 +79,14 @@ public class DefaultTextProvider implements TextProvider
 		{
 			params = EMPTY_ARGS;
 		}
-		return I18N.getText(key, defaultValue, getResourceProvider(), getLocaleProvider(), params);
+		return I18N.getText(key, defaultValue, getResourceProvider(),
+				getLocaleProvider(), params);
 	}
 
 	@Override
 	public String getText(String key, String defaultValue, Object... args)
 	{
-		return I18N.getText(key, defaultValue, getResourceProvider(), getLocaleProvider(), args);
+		return I18N.getText(key, defaultValue, getResourceProvider(),
+				getLocaleProvider(), args);
 	}
 }

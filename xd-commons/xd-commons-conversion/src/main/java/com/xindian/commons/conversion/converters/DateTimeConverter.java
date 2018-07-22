@@ -32,6 +32,8 @@ import com.xindian.commons.conversion.ConversionException;
  * @date 2011-2-10
  * @version 1.0
  */
+
+@SuppressWarnings("rawtypes")
 public class DateTimeConverter extends AbstractConverter
 {
 	private static Logger logger = LoggerFactory.getLogger(DateTimeConverter.class);
@@ -48,7 +50,8 @@ public class DateTimeConverter extends AbstractConverter
 	 * @return
 	 */
 	@SuppressWarnings("deprecation")
-	public static Date parseDateTime(String dateStr, String formatPatten, TimeZone parseTimeZone) throws ParseException
+	public static Date parseDateTime(String dateStr, String formatPatten,
+			TimeZone parseTimeZone) throws ParseException
 	{
 		logger.debug("Parse String to DateTime...");
 		logger.debug(" |use dateStr:[" + dateStr + "]");
@@ -68,7 +71,8 @@ public class DateTimeConverter extends AbstractConverter
 	}
 
 	@Override
-	public Object convert(Map<String, Object> context, Class targetType, Object sourceValue) throws ConversionException
+	public Object convert(Map<String, Object> context, Class targetType,
+			Object sourceValue) throws ConversionException
 	{
 		if (sourceValue instanceof Number)// Number -> Date,数字到时间不使用任何转换,数组表示
 		{
@@ -76,7 +80,8 @@ public class DateTimeConverter extends AbstractConverter
 		} else if (sourceValue instanceof CharSequence)// String -> Date
 		{
 			String value = ((CharSequence) sourceValue).toString();
-			String[] dateTimePatterns = (String[]) context.get(CONTEXT_DATE_TIME_PATTERN_ARRAY_KEY);
+			String[] dateTimePatterns = (String[]) context
+					.get(CONTEXT_DATE_TIME_PATTERN_ARRAY_KEY);
 			TimeZone timeZone = (TimeZone) context.get(CONTEXT_TIME_ZONE_KEY);
 			if (dateTimePatterns != null)
 			{
@@ -91,7 +96,8 @@ public class DateTimeConverter extends AbstractConverter
 						continue;
 					}
 				}
-				throw new ConversionException(context, targetType, sourceValue, "指定格式都无法为类型转换..");
+				throw new ConversionException(context, targetType, sourceValue,
+						"指定格式都无法为类型转换..");
 			} else
 			{
 				try
@@ -175,7 +181,8 @@ public class DateTimeConverter extends AbstractConverter
 			calendar.setLenient(false);
 			return calendar;
 		}
-		String msg = toString(getClass()) + " cannot handle conversion to '" + toString(targetType) + "'";
+		String msg = toString(getClass()) + " cannot handle conversion to '"
+				+ toString(targetType) + "'";
 		if (logger.isWarnEnabled())
 		{
 			logger.warn("    " + msg);
@@ -183,7 +190,8 @@ public class DateTimeConverter extends AbstractConverter
 		throw new ConversionException(msg);
 	}
 
-	protected Object date2date(Map<String, Object> context, Class targetType, Object value) throws ConversionException
+	protected Object date2date(Map<String, Object> context, Class targetType, Object value)
+			throws ConversionException
 	{
 		// Handle java.sql.Timestamp
 		if (value instanceof java.sql.Timestamp)
@@ -215,16 +223,18 @@ public class DateTimeConverter extends AbstractConverter
 		throw new ConversionException("date to date error!");
 	}
 
-	protected Calendar parse(Map<String, Object> context, Class sourceType, Class targetType, String value, DateFormat format)
-			throws ConversionException
+	protected Calendar parse(Map<String, Object> context, Class sourceType,
+			Class targetType, String value, DateFormat format) throws ConversionException
 	{
 		format.setLenient(false);
 		ParsePosition pos = new ParsePosition(0);
 		Date parsedDate = format.parse(value, pos); // ignore the result (use
 													// the Calendar)
-		if (pos.getErrorIndex() >= 0 || pos.getIndex() != value.length() || parsedDate == null)
+		if (pos.getErrorIndex() >= 0 || pos.getIndex() != value.length()
+				|| parsedDate == null)
 		{
-			String msg = "Error converting '" + toString(sourceType) + "' to '" + toString(targetType) + "'";
+			String msg = "Error converting '" + toString(sourceType) + "' to '"
+					+ toString(targetType) + "'";
 			if (format instanceof SimpleDateFormat)
 			{
 				msg += " using pattern '" + ((SimpleDateFormat) format).toPattern() + "'";
@@ -244,16 +254,15 @@ public class DateTimeConverter extends AbstractConverter
 		// context.put(CONTEXT_DATE_TIME_PATTERN_KEY,
 		// "yyyy年MM月dd日,E,hh:mm aaa");
 
-		context.put(CONTEXT_DATE_TIME_PATTERN_ARRAY_KEY, new String[] { "yyyy-MM-dd HH:mm:ss" });
+		context.put(CONTEXT_DATE_TIME_PATTERN_ARRAY_KEY,
+				new String[] { "yyyy-MM-dd HH:mm:ss" });
 
 		// context.put(CONTEXT_LOCALE_KEY, Locale.CHINA);
 		long i = new Date().getTime();
-
 		String x = "2010-01-10 12:12:12";//
-
 		logger.debug("==========" + dateTimeConverter.convert(context, null, x));
-
-		logger.debug("==========" + Currency.getInstance(Locale.getDefault()).getSymbol());
+		logger.debug("==========" + i
+				+ Currency.getInstance(Locale.getDefault()).getSymbol());
 	}
 
 	public static void main(String args[])
@@ -265,33 +274,24 @@ public class DateTimeConverter extends AbstractConverter
 		// context.put(CONTEXT_DATE_TIME_PATTERN_KEY,
 		// "yyyy年MM月dd日,E,hh:mm aaa");
 
-		context.put(CONTEXT_DATE_TIME_PATTERN_ARRAY_KEY, new String[] { "yyyy-MM-dd HH:mm:ss" });
+		context.put(CONTEXT_DATE_TIME_PATTERN_ARRAY_KEY,
+				new String[] { "yyyy-MM-dd HH:mm:ss" });
 
 		context.put(CONTEXT_TIME_ZONE_KEY, TimeZone.getTimeZone("Japan"));
 
 		// context.put(CONTEXT_LOCALE_KEY, Locale.CHINA);
-		long i = new Date().getTime();
-
+		// long i = new Date().getTime();
 		String x = "2010-01-10 12:12:12";// 比如 一个日本鬼子正在使用,这个是日本鬼子时间(+9时间)
 
-		// 将日本鬼子时间转换为标准时间
-
+		// 将时间转换为标准时间
 		// 然后将
-
 		Object d = dateTimeConverter.convert(context, Date.class, x);// 将其转换为"绝对时间",时间的偏移量
-
 		// Calendar c = Calendar.getInstance();
-
 		// c.setTimeZone(TimeZone.getTimeZone("Japan"));
-
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
-
 		sdf2.setTimeZone(TimeZoneConverter.getTimeZone(0));// 转换成(东8区时间)
-
 		logger.debug("time:" + sdf2.format(d) + " timezone:" + sdf2.getTimeZone().getID());
-
 		// logger.debug("==========" + c.getTime());
-
 		// logger.debug("==========" +
 		// Currency.getInstance(Locale.getDefault()).getSymbol());
 	}

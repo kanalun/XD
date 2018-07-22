@@ -6,7 +6,7 @@
 		<artifactId>xd-mvc-ioc</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>xd-mvc-result-guice</artifactId>
+	<artifactId>xd-mvc-ioc-guice</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>

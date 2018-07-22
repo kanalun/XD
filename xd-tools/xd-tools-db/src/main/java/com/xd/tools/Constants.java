@@ -1,9 +1,7 @@
 package com.xd.tools;
 
 /**
- * @author qiucongcong
- * 
- *         2014-4-10
+ * @author qiucongcong 2014-4-10
  */
 public interface Constants
 {

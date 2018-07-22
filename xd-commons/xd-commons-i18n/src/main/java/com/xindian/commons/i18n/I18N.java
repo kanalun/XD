@@ -19,10 +19,11 @@ public class I18N
 {
 	private static final Logger logger = LoggerFactory.getLogger(I18N.class);
 
-	private static ResourceProvider resourceProvider;
+	// private static ResourceProvider resourceProvider;
 
 	private static final Object[] EMPTY_ARGS = new Object[0];
 
+	@SuppressWarnings("rawtypes")
 	private static final Map cache = new ConcurrentHashMap();
 
 	/**
@@ -44,7 +45,8 @@ public class I18N
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T extends Constants> T create(Class<T> type, ResourceProvider resourceProvider, LocaleProvider localeProvider) // throws
+	public static <T extends Constants> T create(Class<T> type,
+			ResourceProvider resourceProvider, LocaleProvider localeProvider) // throws
 	{
 		T constants = (T) cache.get(type);
 		if (constants == null)
@@ -64,13 +66,12 @@ public class I18N
 	 * @param args
 	 * @return
 	 */
-	public static String getText(String key, String defaultText, ResourceProvider resourceProvider,
-			LocaleProvider localeProvider, Object... args)
+	public static String getText(String key, String defaultText,
+			ResourceProvider resourceProvider, LocaleProvider localeProvider,
+			Object... args)
 	{
 		Locale locale = localeProvider.getLocale();
-
-		logger.debug("=============" + locale);
-
+		logger.debug("locale:" + locale);
 		String text = resourceProvider.findText(key, locale);
 		if (text == null)
 		{
@@ -88,6 +89,5 @@ public class I18N
 			return textFormater.format(EMPTY_ARGS);
 		}
 		return textFormater.format(args);
-
 	}
 }

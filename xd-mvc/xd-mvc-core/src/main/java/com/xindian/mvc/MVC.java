@@ -18,7 +18,7 @@ import javax.servlet.ServletException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.xindian.beanutils.Bean5;
+import com.xindian.commons.beanutils.Bean5;
 import com.xindian.commons.utils.ConfigUtils;
 import com.xindian.ioc.winte.IoCActionFactory;
 import com.xindian.mvc.exception.ErrorCodeException;
